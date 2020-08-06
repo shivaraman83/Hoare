@@ -1,0 +1,6 @@
+  { 
+     "packageType" : "gradle", 
+     "rclass"  : "local", 
+     "description" : "gradle repository for demo" , 
+     "key" : "gradle-demo-prod-local"
+   } 

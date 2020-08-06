@@ -1,0 +1,6 @@
+  { 
+     "packageType" : "docker", 
+     "rclass"  : "local", 
+     "description" : "docker repository for demo" , 
+     "key" : "docker-demo-dev-local"
+   } 

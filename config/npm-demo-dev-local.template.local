@@ -1,0 +1,6 @@
+  { 
+     "packageType" : "npm", 
+     "rclass"  : "local", 
+     "description" : "npm repository for demo" , 
+     "key" : "npm-demo-dev-local"
+   } 
