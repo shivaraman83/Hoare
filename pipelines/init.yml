@@ -1,0 +1,28 @@
+resources:
+  - name: demo_gitRepo
+    type: GitRepo
+    configuration:
+      path: XXXXXXX
+      gitProvider: XXXX 
+      buildOn:
+        commit: false
+pipelines:
+  - name: init_environment
+    steps:
+    - name: create_scaffholding
+      type: Bash
+      configuration:
+       inputResources:
+        - name: demo_gitRepo
+          trigger: false
+       integrations:
+        - name: Artifactory
+      execution:
+       onStart:
+        - curl -fL https://getcli.jfrog.io | sh
+        - cp jfrog  `which jfrog`
+        - retry_command jfrog rt config --url $int_Artifactory_url --user
+          $int_Artifactory_user --apikey $int_Artifactory_apikey
+          --interactive=false
+        - "cd ${res_demo_gitRepo_resourcePath}"
+        - "./scripts/create_entities.sh"
