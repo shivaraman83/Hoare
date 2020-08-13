@@ -2,7 +2,7 @@ resources:
   - name: demo_gitRepo
     type: GitRepo
     configuration:
-      path: shimib/Hoare
+      path: shimib/Horae
       gitProvider: Github 
       buildOn:
         commit: false
