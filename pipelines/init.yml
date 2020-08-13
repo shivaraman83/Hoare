@@ -13,7 +13,7 @@ pipelines:
       type: Bash
       configuration:
        inputResources:
-        - name: demo_gitRepo
+        - name: Github
           trigger: false
        integrations:
         - name: Artifactory
