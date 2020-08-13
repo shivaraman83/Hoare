@@ -2,8 +2,8 @@ resources:
   - name: demo_gitRepo
     type: GitRepo
     configuration:
-      path: XXXXXXX
-      gitProvider: XXXX 
+      path: shimib/Hoare
+      gitProvider: Github 
       buildOn:
         commit: false
 pipelines:
