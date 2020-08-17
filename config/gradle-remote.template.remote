@@ -1,0 +1,7 @@
+{
+  "key": "gradle-remote",
+  "rclass" : "remote",
+  "packageType": "gradle"
+  "url" : "https://jcenter.bintray.com",
+  "externalDependenciesEnabled": false
+}
