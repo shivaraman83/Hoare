@@ -51,6 +51,11 @@ echo "Creating local repositories"
 for file in ${dirName}/*.local; do
   jfrog rt rc ${file}
 done
+####### create remote repos
+echo "Creating local repositories"
+for file in ${dirName}/*.remote; do
+  jfrog rt rc ${file}
+done
 ####### create virtual repos
 echo "Creating virtual repositories"
 for file in ${dirName}/*.virtual; do
