@@ -52,7 +52,7 @@ for file in ${dirName}/*.local; do
   jfrog rt rc ${file}
 done
 ####### create remote repos
-echo "Creating local repositories"
+echo "Creating remote repositories"
 for file in ${dirName}/*.remote; do
   jfrog rt rc ${file}
 done
