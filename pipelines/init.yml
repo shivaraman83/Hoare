@@ -3,9 +3,7 @@ resources:
     type: GitRepo
     configuration:
       path: shimib/Horae
-      gitProvider: Github 
-      buildOn:
-        commit: false
+      gitProvider: Github
 pipelines:
   - name: init_environment
     steps:
