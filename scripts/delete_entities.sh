@@ -38,7 +38,7 @@ check_for_jq
 dirName="config"
 
 ####### delete virtual repos
-echo "Creating virtual repositories"
+echo "deleting virtual repositories"
 for file in ${dirName}/*.virtual; do
     virtual="$(b=${file##*/}; echo ${b%.*})"
     URL="/api/repositories/${virtual}"
