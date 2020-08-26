@@ -17,4 +17,5 @@ pipelines:
           $int_Artifactory_user --apikey $int_Artifactory_apikey
           --interactive=false
         - "cd ${res_demo_gitRepo_resourcePath}"
+        - "ls -lR"
         - "./scripts/delete_entities.sh"
