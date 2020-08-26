@@ -40,7 +40,7 @@ dirName="config"
 ####### delete virtual repos
 echo "deleting virtual repositories"
 for file in ${dirName}/*.virtual; do
-    virtual="$(b=${file##*/}; echo ${b%.*})"
+    virtual="$(b=${file##*/}; echo ${b%.*.*})"
     URL="/api/repositories/${virtual}"
     jfrog rt curl -X DELETE ${URL}
 done
