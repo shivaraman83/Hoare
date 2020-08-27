@@ -2,6 +2,6 @@
        "key" : "docker-demo",
        "rclass" : "virtual",
        "packageType" : "docker",
-       "repositories" : "docker-demo-dev-local,docker-demo-qa-local,docker-demo-prod-local",
+       "repositories" : "docker-demo-dev-local,docker-demo-qa-local,docker-demo-prod-local,docker-remote",
        "defaultDeploymentRepo" : "docker-demo-dev-local"
    }
