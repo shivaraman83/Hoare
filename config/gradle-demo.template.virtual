@@ -2,6 +2,6 @@
        "key" : "gradle-demo",
        "rclass" : "virtual",
        "packageType" : "gradle",
-       "repositories" : "gradle-demo-dev-local,gradle-demo-qa-local,gradle-demo-prod-local",
+       "repositories" : "gradle-demo-dev-local,gradle-demo-qa-local,gradle-demo-prod-local,gradle-remote",
        "defaultDeploymentRepo" : "gradle-demo-dev-local"
    }
