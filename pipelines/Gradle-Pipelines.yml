@@ -21,11 +21,11 @@ pipelines:
           sourceLocation:       tutorial/step1-create-gradle-app
           configFileLocation:   .
           configFileName:       jfrog-gradle.yml
-          autoPublishBuildInfo: false
+          autoPublishBuildInfo: true
           inputResources:
             - name:  gitRepo_code
           integrations:
-            - name: artifactory
+            - name: Artifactory
           outputResources:
             - name: gradleBuildInfo     #     Currently not in use
 

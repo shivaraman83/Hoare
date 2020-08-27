@@ -4,6 +4,20 @@ resources:
     configuration:
       path: shimib/Horae
       gitProvider: Github
+  - name: gitRepo_code
+    type: GitRepo
+    configuration:
+      path: shimib/project-examples
+      gitProvider: Github
+      branches:
+        include: eplus-v2-orbitera
+  - name: gradleBuildInfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: gradle_demo
+      buildNumber: ${run_number}
+
 pipelines:
   - name: init_environment
     steps:
