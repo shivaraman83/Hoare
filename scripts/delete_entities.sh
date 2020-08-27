@@ -41,7 +41,21 @@ dirName="config"
 echo "deleting virtual repositories"
 for file in ${dirName}/*.virtual; do
     virtual="$(b=${file##*/}; echo ${b%.*.*})"
-    URL="/api/repositories/${virtual}"
-    jfrog rt curl -X DELETE ${URL}
+    virtualURL="/api/repositories/${virtual}"
+    jfrog rt curl -X DELETE ${virtualURL}
+done
+####### delete local repos
+echo "Deleting local repositories"
+for file in ${dirName}/*.local; do
+    local="$(b=${file##*/}; echo ${b%.*.*})"
+    localURL="/api/repositories/${local}"
+    jfrog rt curl -X DELETE ${localURL}
+done
+####### delete remote repos
+echo "Deleting remote repositories"
+for file in ${dirName}/*.remote; do
+    remote="$(b=${file##*/}; echo ${b%.*.*})"
+    remoteURL="/api/repositories/${remote}"
+    jfrog rt curl -X DELETE ${remoteURL}
 done
 
