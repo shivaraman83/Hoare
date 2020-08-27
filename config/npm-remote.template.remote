@@ -1,7 +1,7 @@
 {
   "key": "npm-remote",
   "rclass" : "remote",
-  "packageType": "npm"
+  "packageType": "npm",
   "url" : "https://registry.npmjs.org",
   "externalDependenciesEnabled": false
 }
