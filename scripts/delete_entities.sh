@@ -36,26 +36,35 @@ check_for_jq
 ######
 
 dirName="config"
+repositoryBaseURL="/api/repositories/"
+groupsBaseURL="/api/security/groups/"
+permsBaseURL="/api/security/permissions/"
 
 ####### delete virtual repos
 echo "deleting virtual repositories"
 for file in ${dirName}/*.virtual; do
     virtual="$(b=${file##*/}; echo ${b%.*.*})"
-    virtualURL="/api/repositories/${virtual}"
+    virtualURL="${repositoryBaseURL}${virtual}"
     jfrog rt curl -X DELETE ${virtualURL}
 done
 ####### delete local repos
 echo "Deleting local repositories"
 for file in ${dirName}/*.local; do
     local="$(b=${file##*/}; echo ${b%.*.*})"
-    localURL="/api/repositories/${local}"
+    localURL="${repositoryBaseURL}${local}"
     jfrog rt curl -X DELETE ${localURL}
 done
 ####### delete remote repos
 echo "Deleting remote repositories"
 for file in ${dirName}/*.remote; do
     remote="$(b=${file##*/}; echo ${b%.*.*})"
-    remoteURL="/api/repositories/${remote}"
+    remoteURL="${repositoryBaseURL}${remote}"
     jfrog rt curl -X DELETE ${remoteURL}
 done
-
+####### delete groups
+echo "Deleting groups"
+for file in ${dirName}/*.group; do
+  group="$(b=${file##*/}; echo ${b%.*})"
+  groupURL="${groupsBaseURL}${group}"
+  jfrog rt curl -X DELETE ${groupURL}
+done
