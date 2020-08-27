@@ -61,6 +61,13 @@ for file in ${dirName}/*.remote; do
     remoteURL="${repositoryBaseURL}${remote}"
     jfrog rt curl -X DELETE ${remoteURL}
 done
+###### delete permission targets
+echo "Deleting permission targets"
+for file in ${dirName}/*.permissiontarget; do
+  permissionTarget="$(b=${file##*/}; echo ${b%.*})"
+  permTargetURL="${permsBaseURL}${permissionTarget}"
+  jfrog rt curl -X DELETE ${permTargetURL}
+done
 ####### delete groups
 echo "Deleting groups"
 for file in ${dirName}/*.group; do
