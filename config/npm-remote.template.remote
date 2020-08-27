@@ -3,5 +3,5 @@
   "rclass" : "remote",
   "packageType": "npm",
   "url" : "https://registry.npmjs.org",
-  "externalDependenciesEnabled": false
+  "externalDependenciesEnabled": "false"
 }

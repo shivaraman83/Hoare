@@ -3,5 +3,5 @@
   "rclass" : "remote",
   "packageType": "gradle",
   "url" : "https://jcenter.bintray.com",
-  "externalDependenciesEnabled": false
+  "externalDependenciesEnabled": "false"
 }
