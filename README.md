@@ -1,2 +1,2 @@
 # Horae
-Seeding information for JFrog Platform Deployment free tier
+Seeding information for JFrog Platform Deployment free trial
