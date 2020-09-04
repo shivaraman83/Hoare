@@ -41,7 +41,7 @@ check_rt_status() {
 ###### verify jq, curl and cli are installed
 check_for_cli
 check_for_curl
-check_for_jq
+#check_for_jq
 ######
 
 dirName="config"
@@ -74,16 +74,16 @@ for file in ${dirName}/*.permissiontarget; do
   jfrog rt curl -X PUT -H "Content-Type: application/json" --data "@${file}" /api/v2/security/permissions/$permissionTarget
 done
 
-echo "Creating update_indexes XRay body"
-REPOS_TO_ADD=`jq -s -c '. as $root | del(.[0]) | map_values({pkg_type: (. as $elem | $root[0].dict[] | select(.from == $elem.packageType) | .to), name: .key, type: "local"})' dict.json ${dirName}/*.local`
+BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
+for file in ${dirName}/*.policy; do
+    policy="$(b=${file##*/}; echo ${b%.*})"
+    curl -X POST --silent -H "Content-Type: application/json" --data "@${file}" ${BASEURL}/xray/api/v2/policies
+done
 
-read XRAY_URL XRAY_USER XRAY_PASS < <(echo $(cat ~/.jfrog/jfrog-cli.conf | jq '.artifactory[] | select (.isDefault == true) | {url : (.url | sub("\/artifactory\/";"\/xray\/")), user, password }' | jq -r '.url, .user, .password'))
+for file in ${dirName}/*.watch; do
+    watch="$(b=${file##*/}; echo ${b%.*})"
+    curl -X POST --silent -H "Content-Type: application/json" --data "@${file}" ${BASEURL}/xray/api/v2/watches
+done
 
-read XRAY_IDX XRAY_NON_IDX < <(echo $(curl -s -u ${XRAY_USER}:${XRAY_PASS} ${XRAY_URL}/api/v1/binMgr/default/repos | jq -c -r '.indexed_repos, .non_indexed_repos'))
 
-XRAY_OUT_NON_IDX=`echo $XRAY_NON_IDX | jq -r -c --argjson toadd $REPOS_TO_ADD '. - $toadd'`
-XRAY_OUT_IDX=`echo $XRAY_IDX | jq -r -c --argjson toadd $REPOS_TO_ADD '. + $toadd | unique'`
-
-echo "{\"indexed_repos\":${XRAY_OUT_IDX},\"non_indexed_repos\":${XRAY_OUT_NON_IDX}}" > ${dirName}/update_indexes.index
-#------------------------------------------------------------
 

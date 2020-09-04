@@ -75,3 +75,15 @@ for file in ${dirName}/*.group; do
   groupURL="${groupsBaseURL}${group}"
   jfrog rt curl -X DELETE ${groupURL}
 done
+
+
+BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
+for file in ${dirName}/*.policy; do
+    policy="$(b=${file##*/}; echo ${b%.*})"
+    curl -X DELETE --silent  ${BASEURL}/xray/api/v2/policies/$policy
+done
+
+for file in ${dirName}/*.watch; do
+    watch="$(b=${file##*/}; echo ${b%.*})"
+    curl -X DELETE --silent  ${BASEURL}/xray/api/v2/watches/$watch
+done
