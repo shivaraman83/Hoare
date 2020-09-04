@@ -78,12 +78,12 @@ done
 
 
 BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
+for file in ${dirName}/*.watch; do
+    watch="$(b=${file##*/}; echo ${b%.*})"
+    curl -u ${int_Artifactory_user}:${int_Artifactory_apikey} -X DELETE --silent  ${BASEURL}/xray/api/v2/watches/$watch
+done
 for file in ${dirName}/*.policy; do
     policy="$(b=${file##*/}; echo ${b%.*})"
     curl -u ${int_Artifactory_user}:${int_Artifactory_apikey} -H 'Content-Type:application/json' -X DELETE --silent  ${BASEURL}/xray/api/v2/policies/$policy
 done
 
-for file in ${dirName}/*.watch; do
-    watch="$(b=${file##*/}; echo ${b%.*})"
-    curl -u ${int_Artifactory_user}:${int_Artifactory_apikey} -X DELETE --silent  ${BASEURL}/xray/api/v2/watches/$watch
-done
