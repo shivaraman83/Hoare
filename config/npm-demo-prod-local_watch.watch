@@ -5,18 +5,18 @@
        "active": true
    },
    "project_resources" :  {
-      [{ "type" : "repository",
+     "resources":  [{ "type" : "repository",
   "bin_mgr_id" : "default",
   "name" : "npm-demo-prod-local"
   
 }
 ] 
    },
-   "assigned_policies" : {
+   "assigned_policies" : 
       [  {
     "type" : "security",
     "name" : "demo-default-policy"
   }
 ] 
-   }
+   
  } 
