@@ -98,7 +98,7 @@ MC_TOKEN=`echo $MC_TOKEN_FULL | jq -c -r .access_token`
 JPDS=`curl --silent -X GET -H "Authorization: Bearer ${MC_TOKEN}" ${BASEURL}/mc/api/v1/jpds`
 JPD_VALUES=`echo $JPDS | jq -c -r -s '.[] | map_values({  "url": .url, "id": .id})'`
 TARGET_JPDS=`echo $JPD_VALUES | jq -c  '. | map (. | select (.id != "JPD-1"))'`
-echo `curl -X PUT -d "{\\"entities\\" : [\\"USERS\\",\\"GROUPS\\",\\"PERMISSIONS\\",\\"TOKENS\\"], \\"targets\\" : ${TARGET_JPDS} }" -H "Content-Type:application/json" -H "Authorization: Bearer ${MC_TOKEN}" ${BASEURL}/mc/api/v1/federation/JPD-1`
+
 ### deleting local repos on the edges
 EDGE_URLS_JSON=`echo ${TARGET_JPDS} | jq -c -r ' map(.url)'`
 for edge_url in $(echo ${TARGET_JPDS} | jq -c -r '.[] | .url');do
@@ -109,7 +109,7 @@ for edge_url in $(echo ${TARGET_JPDS} | jq -c -r '.[] | .url');do
   for file in ${dirName}/*prod*.local; do
     local="$(b=${file##*/}; echo ${b%.*.*})"
     localURL="${repositoryBaseURL}${local}"
-    curl -X DELETE -u ${int_Artifactory_user}:${int_Artifactory_apikey} --url "${edge_url}artifactory/${localURL}" 
+    curl -X DELETE -v -u ${int_Artifactory_user}:${int_Artifactory_apikey} --url "${edge_url}artifactory/${localURL}" 
   done
 done
 
