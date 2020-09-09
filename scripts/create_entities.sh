@@ -41,10 +41,33 @@ check_rt_status() {
 ###### verify jq, curl and cli are installed
 check_for_cli
 check_for_curl
-#check_for_jq
+check_for_jq
 ######
 
 dirName="config"
+##################
+# If in E+, create access federation
+### ASSUMPTION: main JPD has the id of JPD-1, if this is not the case, we'll need to validate what JPD id we are connected to through jfrog CLI.
+#
+# This will set star access federation from JPD-1 to all other JPDs for ALL security entities.
+#
+######
+BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
+MAIN_SRV_ID=`jfrog rt curl --silent --url /api/system/service_id`
+MAIN_ACC_TOKEN=`jfrog rt curl -d "{\\"service_id\\" : \\"${MAIN_SRV_ID}\\"}" -H "Content-Type:application/json" --silent --url /api/security/access/admin/token`
+ACC_TOKEN=`echo $MAIN_ACC_TOKEN | jq -c -r .tokenValue`
+MC_TOKEN_FULL=`curl -s -X POST -d 'username=admin' -d 'scope=applied-permissions/user' -d 'audience=jfmc@*' -d 'expires_in=3600' -d 'grant_type=client_credentials'  -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/access/api/v1/oauth/token`
+MC_TOKEN=`echo $MC_TOKEN_FULL | jq -c -r .access_token`
+JPDS=`curl --silent -X GET -H "Authorization: Bearer ${MC_TOKEN}" ${BASEURL}/mc/api/v1/jpds`
+JPD_VALUES=`echo $JPDS | jq -c -r -s '.[] | map_values({ "name": .name, "url": .url, "id": .id})'`
+TARGET_JPDS=`echo $JPD_VALUES | jq -c  '. | map (. | select (.id != "JPD-1"))'`
+curl -X PUT -d "{\\"entities\\" : [\\"USERS\\",\\"GROUPS\\",\\"PERMISSIONS\\",\\"TOKENS\\"], \\"targets\\" : ${TARGET_JPDS} }" -H "Content-Type:application/json" -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/mc/api/v1/federation\?JPD-1
+######################
+# End of Access Federartion
+#######################
+
+
+
 
 ####### create local repos
 echo "Creating local repositories"
