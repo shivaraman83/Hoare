@@ -70,7 +70,7 @@ JPD_VALUES=`echo $JPDS | jq -c -r -s '.[] | map_values({ "name": .name, "url": .
 echo $JPD_VALUES
 TARGET_JPDS=`echo $JPD_VALUES | jq -c  '. | map (. | select (.id != "JPD-1"))'`
 echo $TARGET_JPDS
-curl -X PUT -d "{\\"entities\\" : [\\"USERS\\",\\"GROUPS\\",\\"PERMISSIONS\\",\\"TOKENS\\"], \\"targets\\" : ${TARGET_JPDS} }" -H "Content-Type:application/json" -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/mc/api/v1/federation\?JPD-1
+curl -X PUT -d "{\\"entities\\" : [\\"USERS\\",\\"GROUPS\\",\\"PERMISSIONS\\",\\"TOKENS\\"], \\"targets\\" : ${TARGET_JPDS} }" -H "Content-Type:application/json" -H "Authorization: Bearer ${MC_TOKEN}" ${BASEURL}/mc/api/v1/federation\?JPD-1
 ######################
 # End of Access Federartion
 #######################
