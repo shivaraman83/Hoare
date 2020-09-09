@@ -20,7 +20,7 @@ resources:
   - name:       npm_fileSpec
     type:       FileSpec
     configuration:     
-      sourceArtifactory:    artifactory
+      sourceArtifactory:    Artifactory
       pattern:              team1-npm-dev-us/angular-animate/-/angular-animate-1.4.14.tgz
       target:               npm_results/
       buildName:            npm_build   # optional
