@@ -60,7 +60,7 @@ MAIN_ACC_TOKEN=`jfrog rt curl -d "{\\"service_id\\" : \\"${MAIN_SRV_ID}\\"}" -H 
 echo $MAIN_ACC_TOKEN
 ACC_TOKEN=`echo $MAIN_ACC_TOKEN | jq -c -r .tokenValue`
 echo $ACC_TOKEN
-MC_TOKEN_FULL=`curl -s -X POST -d 'username=admin' -d 'scope=applied-permissions/user' -d 'audience=jfmc@*' -d 'expires_in=3600' -d 'grant_type=client_credentials'  -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/access/api/v1/oauth/token`
+MC_TOKEN_FULL=`curl -s -X POST -d "username=${int_Artifactory_user}" -d 'scope=applied-permissions/user' -d 'audience=jfmc@*' -d 'expires_in=3600' -d 'grant_type=client_credentials'  -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/access/api/v1/oauth/token`
 echo $MC_TOKEN_FULL
 MC_TOKEN=`echo $MC_TOKEN_FULL | jq -c -r .access_token`
 echo $MC_TOKEN
