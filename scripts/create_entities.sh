@@ -53,14 +53,23 @@ dirName="config"
 #
 ######
 BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
+echo $BASEURL
 MAIN_SRV_ID=`jfrog rt curl --silent --url /api/system/service_id`
+echo $MAIN_SRV_ID
 MAIN_ACC_TOKEN=`jfrog rt curl -d "{\\"service_id\\" : \\"${MAIN_SRV_ID}\\"}" -H "Content-Type:application/json" --silent --url /api/security/access/admin/token`
+echo $MAIN_ACC_TOKEN
 ACC_TOKEN=`echo $MAIN_ACC_TOKEN | jq -c -r .tokenValue`
+echo $ACC_TOKEN
 MC_TOKEN_FULL=`curl -s -X POST -d 'username=admin' -d 'scope=applied-permissions/user' -d 'audience=jfmc@*' -d 'expires_in=3600' -d 'grant_type=client_credentials'  -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/access/api/v1/oauth/token`
+echo $MC_TOKEN_FULL
 MC_TOKEN=`echo $MC_TOKEN_FULL | jq -c -r .access_token`
+echo $MC_TOKEN
 JPDS=`curl --silent -X GET -H "Authorization: Bearer ${MC_TOKEN}" ${BASEURL}/mc/api/v1/jpds`
+echo $JPDS
 JPD_VALUES=`echo $JPDS | jq -c -r -s '.[] | map_values({ "name": .name, "url": .url, "id": .id})'`
+echo $JPD_VALUES
 TARGET_JPDS=`echo $JPD_VALUES | jq -c  '. | map (. | select (.id != "JPD-1"))'`
+echo $TARGET_JPDS
 curl -X PUT -d "{\\"entities\\" : [\\"USERS\\",\\"GROUPS\\",\\"PERMISSIONS\\",\\"TOKENS\\"], \\"targets\\" : ${TARGET_JPDS} }" -H "Content-Type:application/json" -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/mc/api/v1/federation\?JPD-1
 ######################
 # End of Access Federartion
