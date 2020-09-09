@@ -66,7 +66,7 @@ MC_TOKEN=`echo $MC_TOKEN_FULL | jq -c -r .access_token`
 echo $MC_TOKEN
 JPDS=`curl --silent -X GET -H "Authorization: Bearer ${MC_TOKEN}" ${BASEURL}/mc/api/v1/jpds`
 echo $JPDS
-JPD_VALUES=`echo $JPDS | jq -c -r -s '.[] | map_values({ "name": .name, "url": .url, "id": .id})'`
+JPD_VALUES=`echo $JPDS | jq -c -r -s '.[] | map_values({  "url": .url, "id": .id})'`
 echo $JPD_VALUES
 TARGET_JPDS=`echo $JPD_VALUES | jq -c  '. | map (. | select (.id != "JPD-1"))'`
 echo $TARGET_JPDS
