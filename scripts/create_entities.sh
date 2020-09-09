@@ -116,7 +116,7 @@ for edge_url in $(echo ${TARGET_JPDS} | jq -c -r '.[] | .url');do
 
   echo "Creating prod local repositories on the edge node ${edge_url}"
   for file in ${dirName}/*prod*.local; do
-    echo "jfrog rt rc --access-token ${EDGE_TOKEN} --url ${edge_url}/artifactory  ${file} "
+    jfrog rt rc --access-token ${EDGE_TOKEN} --url "${edge_url}artifactory"  ${file} 
   done
 done
 
