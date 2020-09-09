@@ -82,7 +82,7 @@ resources:
   - name:       New_ReleaseBundle
     type:       ReleaseBundle
     configuration:
-      sourceDistribution:   distribution
+      sourceDistribution:   Distribution
       name:                 New_ReleaseBundle
       version:              v1.0.0
       isSigned:             false
@@ -90,7 +90,7 @@ resources:
   - name:       Signed_ReleaseBundle
     type:       ReleaseBundle
     configuration:
-      sourceDistribution:   distribution
+      sourceDistribution:   Distribution
       name:                 Signed_ReleaseBundle
       version:              v1.0.0
 
@@ -98,7 +98,7 @@ resources:
   - name:           Distribution_Rule
     type:           DistributionRule
     configuration:
-      sourceDistribution:   distribution
+      sourceDistribution:   Distribution
       serviceName:          edge-jpd
       siteName:             "edge-jpd"
       cityName:             "*"
