@@ -111,9 +111,12 @@ done
 ### creating local repos on the edges
 EDGE_URLS_JSON=`echo ${TARGET_JPDS} | jq -c -r ' map(.url)`
 for edge_url in $(echo ${TARGET_JPDS} | jq -c -r '.[] | .url');do
+  EDGE_TOKEN_FULL=`curl -s -X POST -d "username=${int_Artifactory_user}" -d 'scope=applied-permissions/user' -d 'audience=jfrt@*' -d 'expires_in=3600' -d 'grant_type=client_credentials'  -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/access/api/v1/oauth/token`
+  EDGE_TOKEN=`echo $EDGE_TOKEN_FULL | jq -c -r .access_token`
+
   echo "Creating prod local repositories on the edge node ${edge_url}"
   for file in ${dirName}/*prod*.local; do
-    jfrog rt rc --access-token ${ACC_TOKEN} --url "${edge_url}/artifactory"  ${file} 
+    jfrog rt rc --access-token ${EDGE_TOKEN} --url "${edge_url}/artifactory"  ${file} 
   done
 done
 
