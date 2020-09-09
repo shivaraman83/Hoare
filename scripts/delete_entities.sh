@@ -109,7 +109,7 @@ for edge_url in $(echo ${TARGET_JPDS} | jq -c -r '.[] | .url');do
   for file in ${dirName}/*prod*.local; do
     local="$(b=${file##*/}; echo ${b%.*.*})"
     localURL="${repositoryBaseURL}${local}"
-    jfrog rt curl -X DELETE --user ${int_Artifactory_user} --password ${int_Artifactory_apikey} --url "${edge_url}artifactory"  ${localURL} 
+    curl -X DELETE --user ${int_Artifactory_user} --password ${int_Artifactory_apikey} --url "${edge_url}artifactory/${localURL}" 
   done
 done
 
