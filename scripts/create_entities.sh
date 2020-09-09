@@ -108,5 +108,12 @@ for file in ${dirName}/*.watch; do
     curl -u ${int_Artifactory_user}:${int_Artifactory_apikey} -X POST --silent -H "Content-Type: application/json" --data "@${file}" ${BASEURL}/xray/api/v2/watches
 done
 
-
+### creating local repos on the edges
+EDGE_URLS_JSON=`echo ${TARGET_JPDS} | jq -c -r ' map(.url)`
+for edge_url in $(echo ${TARGET_JPDS} | jq -c -r '.[] | .url');do
+  echo "Creating prod local repositories on the edge node ${edge_url}"
+  for file in ${dirName}/*prod*.local; do
+    jfrog rt rc --access-token ${ACC_TOKEN} --url ${edge_url}  ${file} 
+  done
+done
 
