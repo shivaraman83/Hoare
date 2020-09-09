@@ -15,8 +15,8 @@ pipelines:
         type: NpmBuild
         configuration:
           npmArgs:   --no-progress --no-audit
-          repositoryName:   team1-npm
-          sourceLocation:   tutorial/step2-create-ui-pkg
+          repositoryName: npm-demo
+          sourceLocation: tutorial/step2-create-ui-pkg
           integrations:
             - name: Artifactory
           inputResources:
@@ -51,7 +51,7 @@ pipelines:
       - name: npm_publish
         type: NpmPublish
         configuration:
-          repositoryName:       team1-npm
+          repositoryName:       npm-demo
           integrations:
             - name: Artifactory
           inputSteps:
@@ -91,7 +91,7 @@ pipelines:
         configuration:
           dockerFileLocation: tutorial/step2-create-ui-pkg
           dockerFileName: Dockerfile
-          dockerImageName: ${ArtIP}/team1-docker-dev-us/npm-app
+          dockerImageName: ${ArtIP}/docker-demo/npm-app
           dockerImageTag: ${Version}
           inputSteps:
             - name: npm_publish
@@ -116,7 +116,7 @@ pipelines:
       - name: Npm_docker_push
         type: DockerPush
         configuration:
-          targetRepository:     team1-docker-dev-us
+          targetRepository: docker-demo
           autoPublishBuildInfo: true
           integrations:
             - name:  Artifactory
@@ -143,7 +143,7 @@ pipelines:
       - name: npm_docker_promote
         type: PromoteBuild
         configuration:
-          targetRepository:      team1-docker-staging-us 
+          targetRepository:      docker-demo-prod-local
           includeDependencies:   true   
           status:                Passed
           comment:               Artifact passed Xray Scan
