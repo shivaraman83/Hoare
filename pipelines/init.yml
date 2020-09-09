@@ -25,6 +25,85 @@ resources:
       target:               npm_results/
       buildName:            npm_build   # optional
       buildNumber:          ${run_number}
+  - name: npmBuildInfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: npm_build
+      buildNumber: ${run_number}
+
+  - name: scanned_npmBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: npm_build
+      buildNumber: ${run_number}
+      
+  - name: promoted_npmBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: npm_build
+      buildNumber: ${run_number}
+      
+      
+  - name: docker_npmBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: npm_build
+      buildNumber: ${run_number}
+   
+   
+  - name: scanned_npm_dockerBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: npm_build
+      buildNumber: ${run_number}
+
+
+  - name: promoted_docker_npmBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: npm_build
+      buildNumber: ${run_number}  
+      
+  - name: final_docker_npmBuild_Info 
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: npm_build
+      buildNumber: ${run_number}    
+      
+      
+
+  - name:       New_ReleaseBundle
+    type:       ReleaseBundle
+    configuration:
+      sourceDistribution:   distribution
+      name:                 New_ReleaseBundle
+      version:              v1.0.0
+      isSigned:             false
+
+  - name:       Signed_ReleaseBundle
+    type:       ReleaseBundle
+    configuration:
+      sourceDistribution:   distribution
+      name:                 Signed_ReleaseBundle
+      version:              v1.0.0
+
+
+  - name:           Distribution_Rule
+    type:           DistributionRule
+    configuration:
+      sourceDistribution:   distribution
+      serviceName:          edge-jpd
+      siteName:             "edge-jpd"
+      cityName:             "*"
+      countryCodes:
+        - "*"
       
 pipelines:
   - name: init_environment
