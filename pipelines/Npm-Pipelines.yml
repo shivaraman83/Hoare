@@ -89,6 +89,7 @@ pipelines:
       - name: npm_docker_build
         type: DockerBuild
         configuration:
+          affinityGroup: bldGroup
           dockerFileLocation: tutorial/step2-create-ui-pkg
           dockerFileName: Dockerfile
           dockerImageName: horaetest3.jfrog.io/docker-demo/npm-app
@@ -116,6 +117,7 @@ pipelines:
       - name: Npm_docker_push
         type: DockerPush
         configuration:
+          affinityGroup: bldGroup
           targetRepository: docker-demo
           autoPublishBuildInfo: true
           integrations:
