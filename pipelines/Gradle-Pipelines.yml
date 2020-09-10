@@ -66,7 +66,7 @@ pipelines:
         configuration:
           dockerFileLocation: tutorial/step1-create-gradle-app
           dockerFileName: Dockerfile
-          dockerImageName: ${ArtIP}/team1-docker-dev-us/gradle-app
+          dockerImageName: horaetest3.jfrog.io/docker-demo/gradle-app
           dockerImageTag: ${Version}
           inputSteps:
             - name: gradle_bld_app
@@ -78,7 +78,7 @@ pipelines:
             - name: gradleBuildInfo     
               trigger: false
           integrations:
-            - name: artifactory
+            - name: Artifactory
         execution:
           onStart:
           # export artifactory ip from internal build env var to tag the docker image
@@ -88,10 +88,10 @@ pipelines:
       - name: Gradle_docker_push
         type: DockerPush
         configuration:
-          targetRepository:     team1-docker-dev-us
+          targetRepository:     docker-demo
           autoPublishBuildInfo: true
           integrations:
-            - name:  artifactory
+            - name:  Artifactory
           inputSteps:
             - name: Gradle_docker_build
           outputResources:
@@ -110,7 +110,7 @@ pipelines:
       - name: gradle_docker_promote
         type: PromoteBuild
         configuration:
-          targetRepository:      team1-docker-staging-us
+          targetRepository:      docker-demo
           includeDependencies:   true
           status:                Passed
           comment:               Artifact passed Xray Scan
