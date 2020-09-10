@@ -19,11 +19,57 @@ resources:
       target:               gradle_results/*.jar
       buildName:            gradle_build   # optional
       buildNumber:          ${run_number}        
+#-------------------- Gradle BuildInfo -----------------------------
   - name: gradleBuildInfo
     type: BuildInfo
     configuration:
       sourceArtifactory: Artifactory
-      buildName: gradle_demo
+      buildName: gradle_build
+      buildNumber: ${run_number}
+      
+  - name: scanned_gradleBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: gradle_build
+      buildNumber: ${run_number}
+      
+  - name: promoted_gradleBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: gradle_build
+      buildNumber: ${run_number}
+
+  - name: docker_gradleBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: gradle_build
+      buildNumber: ${run_number}
+
+
+  - name: scanned_gradle_dockerBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: gradle_build
+      buildNumber: ${run_number}
+
+
+  - name: promoted_docker_gradleBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: gradle_build
+      buildNumber: ${run_number}
+
+
+  - name: final_docker_gradleBuild_Info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: Artifactory
+      buildName: gradle_build
       buildNumber: ${run_number}
   - name:       npm_fileSpec
     type:       FileSpec
@@ -107,8 +153,8 @@ resources:
     type:           DistributionRule
     configuration:
       sourceDistribution:   Distribution
-      serviceName:          edge-jpd
-      siteName:             "edge-jpd"
+      serviceName:          horaeedgetest3
+      siteName:             "horaeedgetest3"
       cityName:             "*"
       countryCodes:
         - "*"
