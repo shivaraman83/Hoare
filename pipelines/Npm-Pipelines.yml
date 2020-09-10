@@ -91,7 +91,7 @@ pipelines:
         configuration:
           dockerFileLocation: tutorial/step2-create-ui-pkg
           dockerFileName: Dockerfile
-          dockerImageName: ${int_artifactory_url}/docker-demo/npm-app
+          dockerImageName: horaetest3-docker-demo.jfrog.io/npm-app
           dockerImageTag: ${Version}
           inputSteps:
             - name: npm_publish
