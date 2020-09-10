@@ -11,6 +11,14 @@ resources:
       gitProvider: Github
       branches:
         include: eplus-v2-orbitera
+  - name:       gradle_fileSpec
+    type:       FileSpec
+    configuration:     
+      sourceArtifactory:    Artifactory
+      pattern:              gradle-demo/com/jfrog/frogsws/0.1.0-*/frogsws-0.1.0-*.jar
+      target:               gradle_results/*.jar
+      buildName:            gradle_build   # optional
+      buildNumber:          ${run_number}        
   - name: gradleBuildInfo
     type: BuildInfo
     configuration:
