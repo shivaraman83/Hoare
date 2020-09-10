@@ -16,7 +16,7 @@ pipelines:
           dryRun:                   false
           # Sign step preformed on automatic Release bundle Creation
           sign:                     false
-          storeAtSourceArtifactory: aritfactory
+          storeAtSourceArtifactory: Aritfactory
           inputResources:
             - name:                final_docker_gradleBuild_Info
             - name:                final_docker_npmBuild_Info 
