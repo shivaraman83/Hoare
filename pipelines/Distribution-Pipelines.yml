@@ -1,0 +1,79 @@
+pipelines:
+  - name:    distribution
+    configuration:
+      environmentVariables:
+        readOnly:
+          restCall:   ${int_distribution_url}/api/v1/release_bundle/${res_New_ReleaseBundle_name}/${res_New_ReleaseBundle_version}/sign
+          connString: ${int_artifactory_user}:${int_artifactory_apikey}
+          header: 'Content-Length:'
+    steps:
+    
+      - name: Create_ReleaseBundle
+        type: CreateReleaseBundle
+        configuration:
+          releaseBundleName:        Demo_RB
+          releaseBundleVersion:     V1.2.${run_number}
+          dryRun:                   false
+          # Sign step preformed on automatic Release bundle Creation
+          sign:                     false
+          storeAtSourceArtifactory: aritfactory
+          inputResources:
+            - name:                final_docker_gradleBuild_Info
+            - name:                final_docker_npmBuild_Info 
+          outputResources:
+            - name:                New_ReleaseBundle
+          description:              RB of gradle and npm build
+          releaseNotes:
+            syntax:                 markdown
+            content: |
+              ## Heading
+                * Bullet
+                * Points
+
+
+
+#   Native Step To Sigh Release Bundle
+
+      - name: Sign_ReleaseBundle
+        type: SignReleaseBundle
+        configuration:
+          inputResources:
+            - name:    New_ReleaseBundle
+              trigger: true
+          outputResources:
+            - name:  Signed_ReleaseBundle
+
+
+#  Bash Step to  sign release bundle
+
+#       - name: Sign_ReleaseBundle
+#         type: Bash
+#         configuration:
+#           integrations:
+#             - name: artifactory
+#             - name: distribution
+#           inputResources:
+#             - name:         New_ReleaseBundle
+#               trigger:      true   # default true
+#           outputResources:
+#             - name:         Signed_ReleaseBundle
+
+#         execution:
+# #           onStart:
+# #             - printenv
+#           onExecute:
+#             - curl -XPOST -u${connString} --header "${header} 0" ${restCall}
+#           onSuccess:
+#                - echo "Release Bundle wasapproved signed"
+
+
+
+
+      - name: Distribute_ReleaseBundle
+        type: DistributeReleaseBundle
+        configuration:
+          dryRun: false
+          inputResources:
+            - name: Signed_ReleaseBundle
+              trigger: true
+            - name: Distribution_Rule
