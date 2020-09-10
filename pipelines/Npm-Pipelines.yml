@@ -91,7 +91,7 @@ pipelines:
         configuration:
           dockerFileLocation: tutorial/step2-create-ui-pkg
           dockerFileName: Dockerfile
-          dockerImageName: ${ArtIP}/docker-demo/npm-app
+          dockerImageName: docker-demo/npm-app
           dockerImageTag: ${Version}
           inputSteps:
             - name: npm_publish
