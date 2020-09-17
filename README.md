@@ -14,7 +14,7 @@ https://jfrog.com/platform/free-trial/
 
 ### Installing
 
-# Configure Integrations under "Pipelines"
+#### Configure Integrations under "Pipelines"
   Artifactory
   Distribution
   Github
@@ -22,16 +22,16 @@ https://jfrog.com/platform/free-trial/
  *Note that the integration names must match the source name in the yml configuration and is case-sensitive*
  
  
-# Configure Pipeline Sources
+#### Configure Pipeline Sources
   Add your forked repository (forked from shimib/Horae) as a pipelines source
   
-# Configure Distribution
+#### Configure Distribution
   You will need to add a GPG signing key. Please follow the instructions here [https://www.jfrog.com/confluence/display/JFROG/GPG+Signing] in order to generate your
   GPG singing key pair. *Note: Passphrase should be left empty when creating this key pair.*
   You can use the following REST API in order to upload your GPG signing key and propagate it to your edge node : [https://www.jfrog.com/confluence/display/JFROG/Distribution+REST+API#DistributionRESTAPI-UploadandPropagateGPGSigningKeysforDistribution]
  
   
-# Run Pipelines
+#### Run Pipelines
   1. Run the init pipeline 1st which should : create users, groups, perms, repositories, xray policy & watch, and update xray indexes
   2. Run the gradle_build pipeline
   3. Run the npm_build pipeline
