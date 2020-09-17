@@ -30,16 +30,14 @@ https://jfrog.com/platform/free-trial/
   GPG singing key pair. *Note: Passphrase should be left empty when creating this key pair.*
   You can use the following REST API in order to upload your GPG signing key and propagate it to your edge node : [https://www.jfrog.com/confluence/display/JFROG/Distribution+REST+API#DistributionRESTAPI-UploadandPropagateGPGSigningKeysforDistribution]
  
-  
+
+### Deployment
+
 #### Run Pipelines
   1. Run the init pipeline 1st which should : create users, groups, perms, repositories, xray policy & watch, and update xray indexes
   2. Run the gradle_build pipeline
   3. Run the npm_build pipeline
   4. (The distribution pipeline should be triggered automatically)
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Contributing
 
