@@ -173,6 +173,7 @@ pipelines:
       execution:
        onStart:
         - sudo apt-get install -y haveged
+        - sudo systemctl start haveged
         - curl -fL https://getcli.jfrog.io | sh
         - sudo apt-get install -y jq
         - cp jfrog  `which jfrog`
