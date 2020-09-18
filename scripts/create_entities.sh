@@ -99,9 +99,10 @@ echo -e "5\ny\n" |  gpg --command-fd 0 --homedir gpg  --expert --edit-key jfrog_
 KEY_ID=`gpg --no-default-keyring --secret-keyring gpg/trustdb.gpg --keyring gpg/pubring.kbx --list-keys | grep -e "^ " |tr -d '[:space:]'`
 PR_KEY=`gpg --armor  --no-default-keyring --secret-keyring gpg/trustdb.gpg --keyring gpg/pubring.kbx --export-secret-keys ${KEY_ID}`
 PU_KEY=`gpg --armor  --no-default-keyring --secret-keyring gpg/trustdb.gpg --keyring gpg/pubring.kbx --export ${KEY_ID}`
-GPG_REQ="'{\"key\": { \"public_key\": \"${PU_KEY}\", \"private_key\":\"${PR_KEY}\"}, \"propagate_to_edge_nodes\": true, \"fail_on_propagation_failure\": false }'"
+GPG_REQ="{\"key\": { \"public_key\": \"${PU_KEY}\", \"private_key\":\"${PR_KEY}\"}, \"propagate_to_edge_nodes\": true, \"fail_on_propagation_failure\": false }"
+echo "${GPG_REQ}" > thekey.json
 echo "populating Distribution GPG keys"
-echo `curl -X POST -H "Content-Type:application/json" -d ${GPG_REQ} -H "Accept: application/json" -u ${int_Artifactory_user}:${int_Artifactory_apikey} ${BASEURL}/distribution/api/v1/keys/gpg` 
+echo `curl -X POST -H "Content-Type:application/json" -H "Accept: application/json" -u ${int_Artifactory_user}:${int_Artifactory_apikey} ${BASEURL}/distribution/api/v1/keys/gpg -T thekey.json` 
 #######################
 # End genearting GPG key for Distribution
 #######################
