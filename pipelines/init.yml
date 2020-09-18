@@ -172,8 +172,7 @@ pipelines:
         - name: Artifactory
       execution:
        onStart:
-        - sudo apt-get update
-        - sudo apt-get dist-upgrade
+        - sudo apt-get install -y haveged
         - curl -fL https://getcli.jfrog.io | sh
         - sudo apt-get install -y jq
         - sudo apt-get install -y rng-tools
