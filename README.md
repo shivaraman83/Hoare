@@ -27,11 +27,6 @@ https://jfrog.com/platform/free-trial/
 #### Configure Pipeline Sources
   Add your forked repository (forked from shimib/Horae) as a pipelines source
   
-#### Configure Distribution
-  You will need to add a GPG signing key. Please follow the instructions here [https://www.jfrog.com/confluence/display/JFROG/GPG+Signing] in order to generate your
-  GPG singing key pair. *Note: Passphrase should be left empty when creating this key pair.*
-  You can use the following REST API in order to upload your GPG signing key and propagate it to your edge node : [https://www.jfrog.com/confluence/display/JFROG/Distribution+REST+API#DistributionRESTAPI-UploadandPropagateGPGSigningKeysforDistribution]
- 
 
 ### Deployment
 
