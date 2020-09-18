@@ -175,8 +175,6 @@ pipelines:
         - sudo apt-get install -y haveged
         - curl -fL https://getcli.jfrog.io | sh
         - sudo apt-get install -y jq
-        - sudo apt-get install -y rng-tools
-        - sudo rngd -r /dev/urandom
         - cp jfrog  `which jfrog`
         - retry_command jfrog rt config --url $int_Artifactory_url --user
           $int_Artifactory_user --apikey $int_Artifactory_apikey
