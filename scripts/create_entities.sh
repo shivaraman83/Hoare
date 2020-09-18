@@ -67,7 +67,43 @@ echo `curl -X PUT -d "{\\"entities\\" : [\\"USERS\\",\\"GROUPS\\",\\"PERMISSIONS
 #######################
 
 
+#######################
+# Start generating GPG Key for Distribution
+#######################
 
+
+mkdir gpg
+chmod 700 gpg
+gpg --homedir gpg --list-keys
+cat >keydetails <<EOF
+    %echo Generating a GPG key
+    Key-Type: RSA
+    Key-Length: 2048
+    Subkey-Type: RSA
+    Subkey-Length: 2048
+    Name-Real: jfrog_sample
+    Name-Comment: jfrog_sample
+    Name-Email: jfrog_sample@acme.com
+    Expire-Date: 0
+    %no-ask-passphrase
+    %no-protection
+    %pubring gpg/pubring.kbx
+    %secring gpg/trustdb.gpg
+    # Do a commit here, so that we can later print "done" :-)
+    %commit
+    %echo done
+EOF
+gpg --batch --gen-key keydetails
+echo -e "5\ny\n" |  gpg --command-fd 0 --homedir gpg  --expert --edit-key jfrog_sample@acme.com trust;
+KEY_ID=`gpg --no-default-keyring --secret-keyring gpg/trustdb.gpg --keyring gpg/pubring.kbx --list-keys | grep -e "^ " |tr -d '[:space:]'`
+PR_KEY=`gpg --armor  --no-default-keyring --secret-keyring gpg/trustdb.gpg --keyring gpg/pubring.kbx --export-secret-keys ${KEY_ID}`
+PU_KEY=`gpg --armor  --no-default-keyring --secret-keyring gpg/trustdb.gpg --keyring gpg/pubring.kbx --export ${KEY_ID}`
+GPG_REQ="{\"key\": { \"public_key\": \"${PU_KEY}\", \"private_key\":\"${PR_KEY}\"}, \"propagate_to_edge_nodes\": true, \"fail_on_propagation_failure\": false }"
+echo "populating Distribution GPG keys"
+echo `curl -X POST -H "Content-Type:application/json" -d ${GPG_REQ} -H "Accept: application/json" -u ${int_Artifactory_user}:${int_Artifactory_apikey} ${BASE_URL}/distribution/api/v1/keys/gpg 
+#######################
+# End genearting GPG key for Distribution
+#######################
 
 ####### create local repos
 echo "Creating local repositories"
