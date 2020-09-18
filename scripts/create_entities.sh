@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash 
 export LC_ALL=C
 
 #########################################
@@ -45,6 +45,7 @@ check_for_jq
 ######
 
 dirName="config"
+BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
 ##################
 # If in E+, create access federation
 ### ASSUMPTION: main JPD has the id of JPD-1, if this is not the case, we'll need to validate what JPD id we are connected to through jfrog CLI.
@@ -101,7 +102,7 @@ PU_KEY=`gpg --armor  --no-default-keyring --secret-keyring gpg/trustdb.gpg --key
 GPG_REQ="{\"key\": { \"public_key\": \"${PU_KEY}\", \"private_key\":\"${PR_KEY}\"}, \"propagate_to_edge_nodes\": true, \"fail_on_propagation_failure\": false }"
 echo "populating Distribution GPG keys"
 REQ_MINIMIZE=`echo $GPG_REQ | jq -c -r .`
-echo `curl -X POST -H "Content-Type:application/json" -d '${REQ_MINIMIZE}' -H "Accept: application/json" -u ${int_Artifactory_user}:${int_Artifactory_apikey} ${BASE_URL}/distribution/api/v1/keys/gpg` 
+echo `curl -X POST -H "Content-Type:application/json" -d '${REQ_MINIMIZE}' -H "Accept: application/json" -u ${int_Artifactory_user}:${int_Artifactory_apikey} ${BASEURL}/distribution/api/v1/keys/gpg` 
 #######################
 # End genearting GPG key for Distribution
 #######################
@@ -134,7 +135,6 @@ for file in ${dirName}/*.permissiontarget; do
   jfrog rt curl -X PUT -H "Content-Type: application/json" --data "@${file}" /api/v2/security/permissions/$permissionTarget
 done
 
-BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
 for file in ${dirName}/*.policy; do
     policy="$(b=${file##*/}; echo ${b%.*})"
     curl -u ${int_Artifactory_user}:${int_Artifactory_apikey} -X POST --silent -H "Content-Type: application/json" --data "@${file}" ${BASEURL}/xray/api/v2/policies
