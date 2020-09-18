@@ -100,10 +100,7 @@ PR_KEY=`gpg --armor  --no-default-keyring --secret-keyring gpg/trustdb.gpg --key
 PU_KEY=`gpg --armor  --no-default-keyring --secret-keyring gpg/trustdb.gpg --keyring gpg/pubring.kbx --export ${KEY_ID}`
 GPG_REQ="{\"key\": { \"public_key\": \"${PU_KEY}\", \"private_key\":\"${PR_KEY}\"}, \"propagate_to_edge_nodes\": true, \"fail_on_propagation_failure\": false }"
 echo "populating Distribution GPG keys"
-echo "XXXXXXXXX"
-echo "$GPG_REQ"
-echo "XXXXXXXXX"
-echo `curl -X POST -H "Content-Type:application/json" -d ${GPG_REQ} -H "Accept: application/json" -u ${int_Artifactory_user}:${int_Artifactory_apikey} ${BASE_URL}/distribution/api/v1/keys/gpg` 
+echo `curl -X POST -H "Content-Type:application/json" -d '${GPG_REQ}' -H "Accept: application/json" -u ${int_Artifactory_user}:${int_Artifactory_apikey} ${BASE_URL}/distribution/api/v1/keys/gpg` 
 #######################
 # End genearting GPG key for Distribution
 #######################
