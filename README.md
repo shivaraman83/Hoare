@@ -16,7 +16,9 @@ https://jfrog.com/platform/free-trial/
 
 #### Configure Integrations under "Pipelines"
   Artifactory
+  
   Distribution
+  
   Github
   
  *Note that the integration names must match the source name in the yml configuration and is case-sensitive*
@@ -46,9 +48,10 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 ## Authors
 
 * **Shimi Bandiel**
+* **Saurav Agrawal**
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the - see the [LICENSE.md](LICENSE.md) file for details
