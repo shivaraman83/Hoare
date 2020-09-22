@@ -89,7 +89,7 @@ pipelines:
       - name: Gradle_docker_push
         type: DockerPush
         configuration:
-          targetRepository:     docker-demo
+          targetRepository: docker-demo
           autoPublishBuildInfo: true
           integrations:
             - name:  Artifactory
