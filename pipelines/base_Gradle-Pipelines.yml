@@ -3,7 +3,6 @@ pipelines:
     configuration:
       environmentVariables:
         readOnly:
-          Imagename: $int_Artifactory_url/docker-demo/gradle-app
           Version: 1.1.$run_number
 
 
@@ -67,7 +66,7 @@ pipelines:
         configuration:
           dockerFileLocation: tutorial/step1-create-gradle-app
           dockerFileName: Dockerfile
-          dockerImageName: ${Imagename}
+          dockerImageName: ${ArtIP}/docker-demo/gradle-app
           dockerImageTag: ${Version}
           inputSteps:
             - name: gradle_bld_app
