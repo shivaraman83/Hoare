@@ -3,7 +3,7 @@ pipelines:
     configuration:
       environmentVariables:
         readOnly:
-          Imagename: ${int_artifactory_url}/docker-demo/gradle-app
+          Imagename: ${int_Artifactory_url}/docker-demo/gradle-app
           Version: 1.1.$run_number
 
 
