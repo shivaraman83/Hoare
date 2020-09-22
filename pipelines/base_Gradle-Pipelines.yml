@@ -66,7 +66,7 @@ pipelines:
         configuration:
           dockerFileLocation: tutorial/step1-create-gradle-app
           dockerFileName: Dockerfile
-          dockerImageName: ${ArtIP}/docker-demo/gradle-app
+          dockerImageName: ${Fullimagename}
           dockerImageTag: ${Version}
           inputSteps:
             - name: gradle_bld_app
@@ -83,6 +83,7 @@ pipelines:
           onStart:
           # export artifactory ip from internal build env var to tag the docker image
             - export ArtIP=$(echo ${int_artifactory_url}|awk -F '/' '{print $3}')
+            - export Fullimagename="${ArtIP}/docker-demo/gradle-app" 
 
 
       - name: Gradle_docker_push
