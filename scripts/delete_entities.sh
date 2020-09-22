@@ -78,6 +78,9 @@ done
 
 
 BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
+
+IS_EPLUS=`curl -s -w "%{http_code}" -o /dev/null -u ${int_Artifactory_user}:${int_Artifactory_apikey} ${BASEURL}/distribution/api/v1/system/ping`
+
 for file in ${dirName}/*.watch; do
     watch="$(b=${file##*/}; echo ${b%.*})"
     curl -u ${int_Artifactory_user}:${int_Artifactory_apikey} -X DELETE --silent  ${BASEURL}/xray/api/v2/watches/$watch
@@ -89,21 +92,23 @@ done
 
 
 
-BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
-MAIN_SRV_ID=`jfrog rt curl --silent --url /api/system/service_id`
-MAIN_ACC_TOKEN=`jfrog rt curl -d "{\\"service_id\\" : \\"${MAIN_SRV_ID}\\"}" -H "Content-Type:application/json" --silent --url /api/security/access/admin/token`
-ACC_TOKEN=`echo $MAIN_ACC_TOKEN | jq -c -r .tokenValue`
-MC_TOKEN_FULL=`curl -s -X POST -d "username=${int_Artifactory_user}" -d 'scope=applied-permissions/user' -d 'audience=jfmc@*' -d 'expires_in=3600' -d 'grant_type=client_credentials'  -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/access/api/v1/oauth/token`
-MC_TOKEN=`echo $MC_TOKEN_FULL | jq -c -r .access_token`
-JPDS=`curl --silent -X GET -H "Authorization: Bearer ${MC_TOKEN}" ${BASEURL}/mc/api/v1/jpds`
-JPD_VALUES=`echo $JPDS | jq -c -r -s '.[] | map_values({  "url": .url, "id": .id})'`
-TARGET_JPDS=`echo $JPD_VALUES | jq -c  '. | map (. | select (.id != "JPD-1"))'`
+if [[ "$IS_EPLUS" = "200" ]]
+then
+ BASEURL=`jfrog rt curl --silent --url /api/system/configuration | grep urlBase | sed -E 's/.*>(.*)<.*$/\1/'`
+ MAIN_SRV_ID=`jfrog rt curl --silent --url /api/system/service_id`
+ MAIN_ACC_TOKEN=`jfrog rt curl -d "{\\"service_id\\" : \\"${MAIN_SRV_ID}\\"}" -H "Content-Type:application/json" --silent --url /api/security/access/admin/token`
+ ACC_TOKEN=`echo $MAIN_ACC_TOKEN | jq -c -r .tokenValue`
+ MC_TOKEN_FULL=`curl -s -X POST -d "username=${int_Artifactory_user}" -d 'scope=applied-permissions/user' -d 'audience=jfmc@*' -d 'expires_in=3600' -d 'grant_type=client_credentials'  -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/access/api/v1/oauth/token`
+ MC_TOKEN=`echo $MC_TOKEN_FULL | jq -c -r .access_token`
+ JPDS=`curl --silent -X GET -H "Authorization: Bearer ${MC_TOKEN}" ${BASEURL}/mc/api/v1/jpds`
+ JPD_VALUES=`echo $JPDS | jq -c -r -s '.[] | map_values({  "url": .url, "id": .id})'`
+ TARGET_JPDS=`echo $JPD_VALUES | jq -c  '. | map (. | select (.id != "JPD-1"))'`
 
-### deleting local repos on the edges
-EDGE_URLS_JSON=`echo ${TARGET_JPDS} | jq -c -r ' map(.url)'`
-for edge_url in $(echo ${TARGET_JPDS} | jq -c -r '.[] | .url');do
-#  EDGE_TOKEN_FULL=`curl -s -X POST -d "username=${int_Artifactory_user}" -d 'scope=applied-permissions/user' -d 'audience=jfrt@*' -d 'expires_in=3600' -d 'grant_type=client_credentials'  -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/access/api/v1/oauth/token`
-#  EDGE_TOKEN=`echo $EDGE_TOKEN_FULL | jq -c -r .access_token`
+ ### deleting local repos on the edges
+ EDGE_URLS_JSON=`echo ${TARGET_JPDS} | jq -c -r ' map(.url)'`
+ for edge_url in $(echo ${TARGET_JPDS} | jq -c -r '.[] | .url');do
+ #  EDGE_TOKEN_FULL=`curl -s -X POST -d "username=${int_Artifactory_user}" -d 'scope=applied-permissions/user' -d 'audience=jfrt@*' -d 'expires_in=3600' -d 'grant_type=client_credentials'  -H "Authorization: Bearer ${ACC_TOKEN}" ${BASEURL}/access/api/v1/oauth/token`
+ #  EDGE_TOKEN=`echo $EDGE_TOKEN_FULL | jq -c -r .access_token`
 
   echo "Creating prod local repositories on the edge node ${edge_url}"
   for file in ${dirName}/*prod*.local; do
@@ -111,5 +116,6 @@ for edge_url in $(echo ${TARGET_JPDS} | jq -c -r '.[] | .url');do
     localURL="${repositoryBaseURL}${local}"
     curl -X DELETE -u ${int_Artifactory_user}:${int_Artifactory_apikey} --url "${edge_url}artifactory${localURL}" 
   done
-done
+ done
+fi
 
