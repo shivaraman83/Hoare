@@ -64,6 +64,7 @@ pipelines:
       - name: Gradle_docker_build
         type: DockerBuild
         configuration:
+          affinityGroup: dock1
           dockerFileLocation: tutorial/step1-create-gradle-app
           dockerFileName: Dockerfile
           dockerImageName: ${Fullimagename}
@@ -89,10 +90,11 @@ pipelines:
       - name: Gradle_docker_push
         type: DockerPush
         configuration:
+          affinityGroup: dock1
           targetRepository: docker-demo
           autoPublishBuildInfo: true
           integrations:
-            - name:  Artifactory
+            - name: Artifactory
           inputSteps:
             - name: Gradle_docker_build
           outputResources:
