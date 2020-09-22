@@ -64,9 +64,11 @@ pipelines:
       - name: Gradle_docker_build
         type: DockerBuild
         configuration:
+          environmentVariables:
+                  imagename: ${int_artifactory_url}/docker-demo/gradle-app
           dockerFileLocation: tutorial/step1-create-gradle-app
           dockerFileName: Dockerfile
-          dockerImageName: ${int_artifactory_url}/docker-demo/gradle-app
+          dockerImageName: ${imagename}
           dockerImageTag: ${Version}
           inputSteps:
             - name: gradle_bld_app
