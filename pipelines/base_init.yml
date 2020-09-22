@@ -133,31 +133,6 @@ resources:
       
       
 
-  - name:       New_ReleaseBundle
-    type:       ReleaseBundle
-    configuration:
-      sourceDistribution:   Distribution
-      name:                 New_ReleaseBundle
-      version:              v1.0.0
-      isSigned:             false
-
-  - name:       Signed_ReleaseBundle
-    type:       ReleaseBundle
-    configuration:
-      sourceDistribution:   Distribution
-      name:                 Signed_ReleaseBundle
-      version:              v1.0.0
-
-
-  - name:           Distribution_Rule
-    type:           DistributionRule
-    configuration:
-      sourceDistribution:   Distribution
-      serviceName:          horaeedgetest3
-      siteName:             "horaeedgetest3"
-      cityName:             "*"
-      countryCodes:
-        - "*"
       
 pipelines:
   - name: init_environment
