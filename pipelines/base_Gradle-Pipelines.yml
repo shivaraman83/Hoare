@@ -66,7 +66,7 @@ pipelines:
         configuration:
           dockerFileLocation: tutorial/step1-create-gradle-app
           dockerFileName: Dockerfile
-          dockerImageName: $(echo ${int_artifactory_url}|awk -F '/' '{print $3}')/docker-demo/gradle-app
+          dockerImageName: ${int_artifactory_url}/docker-demo/gradle-app
           dockerImageTag: ${Version}
           inputSteps:
             - name: gradle_bld_app
