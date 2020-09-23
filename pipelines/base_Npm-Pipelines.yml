@@ -92,7 +92,7 @@ pipelines:
           affinityGroup: bldGroup
           dockerFileLocation: tutorial/step2-create-ui-pkg
           dockerFileName: Dockerfile
-          dockerImageName: horaetest3.jfrog.io/docker-demo/npm-app
+          dockerImageName: ${Fullimagename}  
           dockerImageTag: ${Version}
           inputSteps:
             - name: npm_publish
@@ -109,6 +109,9 @@ pipelines:
             # Creating a Folder for the fileSpec Target
             - mkdir -p npm_results
             - popd
+            - export ArtIP=$(echo ${int_Artifactory_url}|awk -F '/' '{print $3}' | sed -e "s/\.jfrog\.io$//" ) 
+            - export Fullimagename="${ArtIP}-docker-demo.jfrog.io/npm-app" 
+
           onSuccess:
             - echo "Congrats The Docker image was build"
 

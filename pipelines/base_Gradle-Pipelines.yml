@@ -99,10 +99,6 @@ pipelines:
             - name: Gradle_docker_build
           outputResources:
             - name: docker_gradleBuild_Info
-        execution:
-          onStart:
-             - export JFROG_CLI_LOG_LEVEL=DEBUG
-             - "set -x"
 
       - name: Gradle_docker_scan
         type: XrayScan
