@@ -23,6 +23,8 @@ https://jfrog.com/platform/free-trial/
   
  *Note that the integration names must match the source name in the yml configuration and is case-sensitive*
  
+ https://www.jfrog.com/confluence/display/JFROG/Configuring+Pipelines#ConfiguringPipelines-add-integrationAddingAdministrationIntegrations
+ 
  
 #### Configure Pipeline Sources
   Add your forked repository (forked from shimib/Horae) as a pipelines source
