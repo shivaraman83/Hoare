@@ -31,7 +31,7 @@ According to the instructios above, generate a Github Personal Access Token with
     Create a Pipelines integration of type Distribution named Distribution and provide connection details to your Distribution endpoint.
   
   
- *Note that the integration names must match the source name in the yml configuration and is case-sensitive*
+ > *Note that the integration names must match the source name in the yml configuration and is case-sensitive*
  
  https://www.jfrog.com/confluence/display/JFROG/Configuring+Pipelines#ConfiguringPipelines-add-integrationAddingAdministrationIntegrations
  
@@ -42,7 +42,7 @@ Fork the following two (2) repositories:
   * https://github.com/shimib/Horae
   * https://github.com/shimib/project-examples
   
-  > Add your forked repository (forked from **shimib/Horae**) as a pipelines source
+Add your forked repository (forked from **shimib/Horae**) as a pipelines source
   
 
 ### Deployment
