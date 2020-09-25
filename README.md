@@ -19,7 +19,7 @@ https://jfrog.com/platform/free-trial/
     Create a Pipelines integration of type Artifactory named "Artifactory" and provide the details for your Artifactory access (URL, admin user and password/apikey).
 
 ##### Github 
-    Create a Pipelines integration of type GitHub named "Github" and provide connection details generated according to: https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration
+    Create a Pipelines integration of type GitHub named "GitHub" and provide connection details generated according to: https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration
 
 According to the instructios above, generate a Github Personal Access Token with the following permissions
 * repo (all)
