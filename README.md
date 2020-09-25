@@ -19,7 +19,12 @@ https://jfrog.com/platform/free-trial/
     Create a Pipelines integration of type Artifactory named "Artifactory" and provide the details for your Artifactory access (URL, admin user and password/apikey).
 
 ##### Github 
-    Create a Pipelines integration of type GitHub named Github and provide connection details to you generate according to: https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration
+    Create a Pipelines integration of type GitHub named "Github" and provide connection details generated according to: https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration
+
+According to the instructios above, generate a Github Personal Access Token with the following permissions
+* repo (all)
+* admin:repo_hook (read, write)
+* admin:public_key (read, write)
   
 ##### Distribution
 ###### Only for E+ subsription (not to perform on the free tier)
@@ -37,7 +42,7 @@ Fork the following two (2) repositories:
   * https://github.com/shimib/Horae
   * https://github.com/shimib/project-examples
   
-    Add your forked repository (forked from **shimib/Horae**) as a pipelines source
+  > Add your forked repository (forked from **shimib/Horae**) as a pipelines source
   
 
 ### Deployment
