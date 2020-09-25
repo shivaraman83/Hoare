@@ -3,12 +3,12 @@ resources:
     type: GitRepo
     configuration:
       path: shimib/Horae
-      gitProvider: Github
+      gitProvider: GitHub
   - name: gitRepo_code
     type: GitRepo
     configuration:
       path: shimib/project-examples
-      gitProvider: Github
+      gitProvider: GitHub
       branches:
         include: eplus-v2-orbitera
   - name:       gradle_fileSpec
