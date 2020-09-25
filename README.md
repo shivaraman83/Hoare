@@ -77,4 +77,4 @@ See also the list of [contributors](https://github.com/shimib/Horae/blob/master/
 
 ## License
 
-This project is licensed under the - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the - see the [LICENSE.md](https://github.com/shimib/Horae/blob/master/LICENSE.md) file for details
