@@ -57,10 +57,21 @@ Add your forked repository (forked from **shimib/Horae**) as a pipelines source
 
 Please read [CONTRIBUTING.md](https://github.com/shimib/Horae/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Authors
+## Contributors
 
-* **Shimi Bandiel**
-* **Saurav Agrawal**
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/shimib"><img src="https://avatars0.githubusercontent.com/u/2115093?s=400&u=83fe53677b3bbabf095ac89911d7ccccbb756f65&v=4" width="100px;" alt=""/><br /><sub><b>Shimi Bandiel</b></sub></a><br /><a title="Answering Questions">💬</a> <a href="https://github.com/shimib/Horae/commits?author=shimib" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Talks">📢</a></td>
+
+<td align="center"><a href="https://github.com/sauravthefrog"><img src="https://avatars1.githubusercontent.com/u/61025719?s=400&u=2ff91a2ea0b176d1bd10e0acc3c44c50e4a5bb24&v=4" width="100px;" alt=""/><br /><sub><b>Saurav Agrawal</b></sub></a><br /><a href="https://github.com/shimib/Horae/commits?author=sauravthefrog" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Tools">🔧</a></td>
+  </tr>
+ </table>
+ <!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
