@@ -32,6 +32,10 @@ https://jfrog.com/platform/free-trial/
  
  
 #### Configure Pipeline Sources
+  Fork the following two (2) repositories:
+  *https://github.com/shimib/Horae
+  *https://github.com/shimib/project-examples
+  
   Add your forked repository (forked from shimib/Horae) as a pipelines source
   
 
