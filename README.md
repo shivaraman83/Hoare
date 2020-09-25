@@ -73,7 +73,7 @@ Please read [CONTRIBUTING.md](https://github.com/shimib/Horae/blob/master/CONTRI
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/shimib/Horae/blob/master/contributors.md) who participated in this project.
 
 ## License
 
