@@ -47,9 +47,11 @@ Add your forked repository (forked from **shimib/Horae**) as a pipelines source
 You can follow the instructions [here | https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch)] to add a "Single-branch" source
 
 > *Note: 
-    E+ Trial: Use -- 
+    
+    > E+ Trial: Use -- 
         Pipeline Config File Filter : pipelines/.*\.yml
-    Free tier: Use --
+    
+    > Free tier: Use --
         Pipeline Config File Filter: pipelines/base_.*yml
   
 
