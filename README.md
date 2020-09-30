@@ -4,8 +4,6 @@ Seeding information for JFrog Platform Deployment free trial
 
 ## Getting Started
 
-Fork this project (shimib/Horae) along with https://github.com/jfrogtraining/project-examples
-
 ### Prerequisites
 
 You will need to have a fresh instance of JFrog Artifactory whether it is commercial or a free trial
@@ -41,8 +39,26 @@ According to the instructios above, generate a Github Personal Access Token with
 Fork the following two (2) repositories:
   
   * https://github.com/shimib/Horae
-  * https://github.com/shimib/project-examples
+  * https://github.com/shimib/project-examples (Make sure you fork the following branch: eplus-v2-orbitera or simply "all branches")
   
+Next we'll need to modify some of the configuration in the forked code. Go to Horae/pipelines/base_init.yml and modify the following values based on your github path. 
+
+resources:
+  - name: demo_gitRepo
+    type: GitRepo
+    configuration:
+      path: [your_Github_username]/Horae
+      gitProvider: GitHub
+  - name: gitRepo_code
+    type: GitRepo
+    configuration:
+      path: [your_Github_username]/project-examples
+      gitProvider: GitHub
+      branches:
+        include: eplus-v2-orbitera
+...        
+...
+        
 Add your forked repository (forked from **shimib/Horae**) as a pipelines source
 You can follow the instructions [here | https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch)] to add a "Single-branch" source
 
