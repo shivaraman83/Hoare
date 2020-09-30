@@ -41,8 +41,11 @@ Fork the following two (2) repositories:
   * https://github.com/shimib/Horae
   * https://github.com/shimib/project-examples (Make sure you fork the following branch: eplus-v2-orbitera or simply "all branches")
   
-Next we'll need to modify some of the configuration in the forked code. Go to Horae/pipelines/base_init.yml and modify the following values based on your github path. 
+Next we'll need to modify some of the configuration in the forked code. 
 
+Go to Horae/pipelines/base_init.yml and modify the following values based on your github path.
+
+> Horae/pipelines/base_init.yml:
 resources:
   - name: demo_gitRepo
     type: GitRepo
@@ -58,6 +61,21 @@ resources:
         include: eplus-v2-orbitera
 ...        
 ...
+
+Go to Horae/pipelines/more_resources.yml and modify the following values based on your artifactory server name.
+
+> Horae/pipelines/more_resources.yml:
+...
+...
+  - name:           Distribution_Rule
+    type:           DistributionRule
+    configuration:
+      sourceDistribution:   Distribution
+      serviceName:          [servername]
+      siteName:             "[servername]"
+      cityName:             "*"
+      countryCodes:
+        - "*"
         
 Add your forked repository (forked from **shimib/Horae**) as a pipelines source
 You can follow the instructions [here | https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch)] to add a "Single-branch" source
