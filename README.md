@@ -45,8 +45,9 @@ Next we'll need to modify some of the configuration in the forked code.
 
 Go to Horae/pipelines/base_init.yml and modify the following values based on your github path.
 
-> Horae/pipelines/base_init.yml:
-resources:
+> Horae/pipelines/base_init.yml:  
+
+resources:  
   \- name: demo_gitRepo  
     type: GitRepo  
     configuration:  
@@ -62,7 +63,8 @@ resources:
 
 Go to Horae/pipelines/more_resources.yml and modify the following values based on your artifactory server name.
 
-> Horae/pipelines/more_resources.yml:
+> Horae/pipelines/more_resources.yml:  
+
   \- name:           Distribution_Rule  
     type:           DistributionRule  
     configuration:  
