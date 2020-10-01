@@ -23,7 +23,7 @@ According to the instructios above, generate a Github Personal Access Token with
 * repo (all)
 * admin:repo_hook (read, write)
 * admin:public_key (read, write)
->>>>>>> 2f3ed30dec7537a56064436cbedacc00813d247d
+> 2f3ed30dec7537a56064436cbedacc00813d247d
   
 ##### Distribution
 ###### Only for E+ subsription (not to perform on the free tier)
