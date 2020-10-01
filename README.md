@@ -49,17 +49,17 @@ Go to Horae/pipelines/base_init.yml and modify the following values based on you
 
 resources:  
   \- name: demo_gitRepo  
-    type: GitRepo  
-    configuration:  
-      path: [**your_Github_username**]/Horae  
-      gitProvider: GitHub  
+     type: GitRepo  
+     configuration:  
+       path: [**your_Github_username**]/Horae  
+       gitProvider: GitHub  
   \- name: gitRepo_code  
-    type: GitRepo  
-    configuration:  
-      path: [**your_Github_username**]/project-examples  
-      gitProvider: GitHub  
-      branches:  
-        include: eplus-v2-orbitera  
+     type: GitRepo  
+     configuration:  
+       path: [**your_Github_username**]/project-examples  
+       gitProvider: GitHub  
+       branches:  
+         include: eplus-v2-orbitera  
 
 Go to Horae/pipelines/more_resources.yml and modify the following values based on your artifactory server name.
 
