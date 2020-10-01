@@ -50,12 +50,12 @@ resources:
   - name: demo_gitRepo  
     type: GitRepo  
     configuration:  
-      path: [your_Github_username]/Horae  
+      path: [*your_Github_username*]/Horae  
       gitProvider: GitHub  
   - name: gitRepo_code  
     type: GitRepo  
     configuration:  
-      path: [your_Github_username]/project-examples  
+      path: [*your_Github_username*]/project-examples  
       gitProvider: GitHub  
       branches:  
         include: eplus-v2-orbitera  
@@ -67,11 +67,11 @@ Go to Horae/pipelines/more_resources.yml and modify the following values based o
     type:           DistributionRule  
     configuration:  
       sourceDistribution:   Distribution  
-      serviceName:          [servername]  
-      siteName:             "[servername]"  
-      cityName:             "*"  
+      serviceName:          [*servername*]  
+      siteName:             "[*servername*]"  
+      cityName:             "\*"  
       countryCodes:  
-        - "*"  
+        - "\*"  
         
 Add your forked repository (forked from **shimib/Horae**) as a pipelines source
 You can follow the instructions [here | https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch)] to add a "Single-branch" source
