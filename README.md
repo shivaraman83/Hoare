@@ -15,33 +15,40 @@ You will need to have a fresh instance of JFrog Platform whether it is commercia
 You'll need to create 3 Pipelines integrations - [see documentation](https://www.jfrog.com/confluence/display/JFROG/Configuring+Pipelines#ConfiguringPipelines-add-integrationAddingAdministrationIntegrations) in order to setup JFrog Pipelines to work with your Artifactory & Distribution services, as well as pull the Pipelines sample code from GitHub. 
 
 ##### 1.1 Github 
-    In order to create a GitHub integration, you need the generate a GitHub Personal Access token first.
-    As also stated in the documentation instructios below, generate a Github Personal Access Token with the following permissions
+   1.1.1 In order to create a GitHub integration, you need the generate a GitHub Personal Access token first.
+   As also stated in the documentation instructios below, generate a Github Personal Access Token with the 
+   following permissions:
+    
     * repo (all)
     * admin:repo_hook (read, write)
     * admin:public_key (read, write)
-    An example token would look like that > 2f3ed30dec7537a56064436cbedacc00813d247d
+   
+   An example token would look like that  `2f3ed30dec7537a56064436cbedacc00813d247d`
     
-    Create a Pipelines integration of type GitHub named "GitHub" and provide connection details generated according to the [documentation](https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration).
+   1.1.2 Create a Pipelines integration of type GitHub named "**GitHub**" and provide connection details generated according to the [documentation](https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration).
 
   
 #####  1.2 Artifactory
-    In order to create an Artifactory integration, we recommend that you'll generate an API Key, [here]( https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey]are) the instructions - .
-    Create a Pipelines integration of type Artifactory named "Artifactory" and provide the details for your Artifactory access (URL, admin user and password/apikey).
-    As an example:
+   In order to create an Artifactory integration, we recommend that you'll generate an API Key following these [instructions]( https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey]).
+   
+   Create a Pipelines integration of type Artifactory named "**Artifactory**" and provide the details for your Artifactory access (URL, admin user and password/apikey).
+   
+   As an example:
+    
     URL - https://myserver.domain.com/artifactory
     Admin user - myname@domain.com
-    Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y
+    Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y'
 
 ##### 1.3 Distribution
 ###### Only for E+ subsription (not to perform on the free tier)
-    Create a Pipelines integration of type Distribution named Distribution and provide connection details to your Distribution endpoint.
-    As an example:
+   Create a Pipelines integration of type Distribution named "**Distribution**" and provide connection details to your Distribution endpoint.
+    
+   As an example:
     *URL - https://myserver.domain.com/distribution*
     *Admin user - myname@domain.com*
     *Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y*
   
- > **Note that the integration names must match the source name in the yml configuration and is case-sensitive**
+ > **Note that the integration names must match the source name in the yaml configuration and are case-sensitive**
 
  
 #### 2.0 Configure Pipeline Sources
@@ -84,8 +91,8 @@ resources:
       countryCodes:  
         - "*"  
 ```        
-2.3 Add your forked repository (forked from **shimib/Horae**) as a pipelines source
-You can follow the instructions [here](https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch) to add a **"Single-branch"** source
+2.3 Add your forked repository (forked from **shimib/Horae**) as a pipelines source.
+You can follow the instructions [here](https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch)) on how to add a **"Single-branch"** source
 
 > Note: 
     
