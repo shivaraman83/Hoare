@@ -45,14 +45,14 @@ You'll need to create 3 Pipelines integrations - [see documentation](https://www
 
  
 #### 2.0 Configure Pipeline Sources
-Fork the following two (2) repositories:
+2.1 Fork the following two (2) repositories:
   
   * https://github.com/shimib/Horae
   * https://github.com/shimib/project-examples (Make sure you fork the following branch: eplus-v2-orbitera or simply "all branches")
   
-Next we'll need to modify some of the configuration in the forked code. 
+2.2 Next we'll need to modify some of the configuration in the forked code. 
 
-Go to Horae/pipelines/base_init.yml and modify the following values based on your github path.
+2.2.1 Go to Horae/pipelines/base_init.yml and modify the following values based on your github path.
 
 > Horae/pipelines/base_init.yml:  
 ```
@@ -70,7 +70,7 @@ resources:
       branches:  
         include: eplus-v2-orbitera  
 ```
-Go to Horae/pipelines/more_resources.yml and modify the following values based on your artifactory server name.
+2.2.2 Go to Horae/pipelines/more_resources.yml and modify the following values based on your artifactory server name.
 
 > Horae/pipelines/more_resources.yml:  
 ```
@@ -84,7 +84,7 @@ Go to Horae/pipelines/more_resources.yml and modify the following values based o
       countryCodes:  
         - "*"  
 ```        
-Add your forked repository (forked from **shimib/Horae**) as a pipelines source
+2.3 Add your forked repository (forked from **shimib/Horae**) as a pipelines source
 You can follow the instructions [here](https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch) to add a **"Single-branch"** source
 
 > Note: 
