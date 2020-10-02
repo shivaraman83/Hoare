@@ -40,7 +40,7 @@ You'll need to create 3 Pipelines integrations - [see documentation](https://www
     Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y'
 
 ##### 1.3 Distribution
-###### Only for E+ subsription (not to perform on the free tier)
+###### Only for Enterprise+ subsription (not to perform on the free tier)
    Create a Pipelines integration of type Distribution named "**Distribution**" and provide connection details to your Distribution endpoint.
     
    As an example:
