@@ -1,6 +1,6 @@
 # Horae
 
-Seeding information for JFrog Platform Deployment free trial
+Setup an end to end example project for JFrog Platform Deployment leveraging the JFrog free trial.
 
 ## Getting Started
 
