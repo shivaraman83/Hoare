@@ -11,10 +11,10 @@ You will need to have a fresh instance of JFrog Platform whether it is commercia
 
 ### Installing
 
-#### Configure Integrations under "Pipelines"
-    You'll need to create 3 Pipelines integrations - [see documentation](https://www.jfrog.com/confluence/display/JFROG/Configuring+Pipelines#ConfiguringPipelines-add-integrationAddingAdministrationIntegrations) in order to setup JFrog Pipelines to work with your Artifactory & Distribution services, as well as pull the Pipelines sample code from GitHub. 
+#### 1.0 Configure Integrations under "Pipelines"
+You'll need to create 3 Pipelines integrations - [see documentation](https://www.jfrog.com/confluence/display/JFROG/Configuring+Pipelines#ConfiguringPipelines-add-integrationAddingAdministrationIntegrations) in order to setup JFrog Pipelines to work with your Artifactory & Distribution services, as well as pull the Pipelines sample code from GitHub. 
 
-##### Github 
+##### 1.1 Github 
     In order to create a GitHub integration, you need the generate a GitHub Personal Access token first.
     As also stated in the documentation instructios below, generate a Github Personal Access Token with the following permissions
     * repo (all)
@@ -25,7 +25,7 @@ You will need to have a fresh instance of JFrog Platform whether it is commercia
     Create a Pipelines integration of type GitHub named "GitHub" and provide connection details generated according to the [documentation](https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration).
 
   
-#####  Artifactory
+#####  1.2 Artifactory
     In order to create an Artifactory integration, we recommend that you'll generate an API Key, [here]( https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey]are) the instructions - .
     Create a Pipelines integration of type Artifactory named "Artifactory" and provide the details for your Artifactory access (URL, admin user and password/apikey).
     As an example:
@@ -33,7 +33,7 @@ You will need to have a fresh instance of JFrog Platform whether it is commercia
     Admin user - myname@domain.com
     Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y
 
-##### Distribution
+##### 1.3 Distribution
 ###### Only for E+ subsription (not to perform on the free tier)
     Create a Pipelines integration of type Distribution named Distribution and provide connection details to your Distribution endpoint.
     As an example:
@@ -44,7 +44,7 @@ You will need to have a fresh instance of JFrog Platform whether it is commercia
  > **Note that the integration names must match the source name in the yml configuration and is case-sensitive**
 
  
-#### Configure Pipeline Sources
+#### 2.0 Configure Pipeline Sources
 Fork the following two (2) repositories:
   
   * https://github.com/shimib/Horae
@@ -60,13 +60,13 @@ resources:
   - name: demo_gitRepo  
     type: GitRepo  
     configuration:  
-      path: [your_Github_username]/Horae  **<<<--- HERE**
+      path: [your_Github_username]/Horae  <<<--- CHANGE HERE
       gitProvider: GitHub  
   - name: gitRepo_code  
     type: GitRepo  
     configuration:  
-      path: [your_Github_username]/project-examples  **<<<--- HERE** 
-      gitProvider: GitHub  
+      path: [your_Github_username]/project-examples  <<<--- CHANGE HERE 
+      gitProvider: GitHub  CHANGE 
       branches:  
         include: eplus-v2-orbitera  
 ```
@@ -78,8 +78,8 @@ Go to Horae/pipelines/more_resources.yml and modify the following values based o
     type:           DistributionRule  
     configuration:  
       sourceDistribution:   Distribution  
-      serviceName:          [servername]  **<<<--- HERE**  
-      siteName:             "[servername]"  **<<<--- HERE**  
+      serviceName:          [servername]  <<<--- CHANGE HERE 
+      siteName:             "[servername]"  <<<--- CHANGE HERE 
       cityName:             "*"  
       countryCodes:  
         - "*"  
@@ -96,15 +96,15 @@ You can follow the instructions [here](https://www.jfrog.com/confluence/display/
         Pipeline Config File Filter: pipelines/base_.*yml
   
 
-### Deployment
+### 3.0 Deployment
 
 You're all set now, and ready to initialize your environment and run your first Pipelines!
 
-#### Run Pipelines
-  1. Run the init pipeline 1st which should: Create users, groups, permissions, repositories, Xray policies & watches, update Xray indexes and setup Access Federation.
-  2. Run the gradle_build pipeline
-  3. Run the npm_build pipeline
-  4. (The distribution pipeline should be triggered automatically)
+#### 4.0 Run Pipelines
+  4.1. Run the init pipeline 1st which should: Create users, groups, permissions, repositories, Xray policies & watches, update Xray indexes and setup Access Federation.
+  4.2. Run the gradle_build pipeline
+  4.3. Run the npm_build pipeline
+  4.4. (The distribution pipeline should be triggered automatically)
 
 ## Contributing
 
