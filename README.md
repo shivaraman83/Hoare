@@ -50,7 +50,7 @@ You'll need to create 3 Pipelines integrations - [see documentation](https://www
   * https://github.com/shimib/Horae
   * https://github.com/shimib/project-examples (Make sure you fork the following branch: eplus-v2-orbitera or simply "all branches")
   
-2.2 Next we'll need to modify some of the configuration in the forked code. 
+2.2 Next we'll need to modify some of the configuration in the forked code:
 
 2.2.1 Go to Horae/pipelines/base_init.yml and modify the following values based on your github path.
 
