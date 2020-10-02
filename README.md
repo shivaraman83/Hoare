@@ -6,34 +6,43 @@ Seeding information for JFrog Platform Deployment free trial
 
 ### Prerequisites
 
-You will need to have a fresh instance of JFrog Artifactory whether it is commercial or a free trial
-https://jfrog.com/platform/free-trial/
+You will need to have a fresh instance of JFrog Platform whether it is commercial or a [free trial](https://jfrog.com/platform/free-trial/)
 
 
 ### Installing
 
 #### Configure Integrations under "Pipelines"
-#####  Artifactory
-    Create a Pipelines integration of type Artifactory named "Artifactory" and provide the details for your Artifactory access (URL, admin user and password/apikey).
+    You'll need to create 3 Pipelines integrations - [see documentation](https://www.jfrog.com/confluence/display/JFROG/Configuring+Pipelines#ConfiguringPipelines-add-integrationAddingAdministrationIntegrations) in order to setup JFrog Pipelines to work with your Artifactory & Distribution services, as well as pull the Pipelines sample code from GitHub. 
 
 ##### Github 
-    Create a Pipelines integration of type GitHub named "GitHub" and provide connection details generated according to: https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration
+    In order to create a GitHub integration, you need the generate a GitHub Personal Access token first.
+    As also stated in the documentation instructios below, generate a Github Personal Access Token with the following permissions
+    * repo (all)
+    * admin:repo_hook (read, write)
+    * admin:public_key (read, write)
+    An example token would look like that > 2f3ed30dec7537a56064436cbedacc00813d247d
+    
+    Create a Pipelines integration of type GitHub named "GitHub" and provide connection details generated according to the [documentation](https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration).
 
-According to the instructios above, generate a Github Personal Access Token with the following permissions
-* repo (all)
-* admin:repo_hook (read, write)
-* admin:public_key (read, write)
-> 2f3ed30dec7537a56064436cbedacc00813d247d
   
+#####  Artifactory
+    In order to create an Artifactory integration, we recommend that you'll generate an API Key, [here]( https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey]are) the instructions - .
+    Create a Pipelines integration of type Artifactory named "Artifactory" and provide the details for your Artifactory access (URL, admin user and password/apikey).
+    As an example:
+    URL - https://myserver.domain.com/artifactory
+    Admin user - myname@domain.com
+    Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y
+
 ##### Distribution
 ###### Only for E+ subsription (not to perform on the free tier)
     Create a Pipelines integration of type Distribution named Distribution and provide connection details to your Distribution endpoint.
+    As an example:
+    *URL - https://myserver.domain.com/distribution*
+    *Admin user - myname@domain.com*
+    *Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y*
   
-  
- > *Note that the integration names must match the source name in the yml configuration and is case-sensitive*
- 
- https://www.jfrog.com/confluence/display/JFROG/Configuring+Pipelines#ConfiguringPipelines-add-integrationAddingAdministrationIntegrations
- 
+ > **Note that the integration names must match the source name in the yml configuration and is case-sensitive**
+
  
 #### Configure Pipeline Sources
 Fork the following two (2) repositories:
@@ -51,12 +60,12 @@ resources:
   - name: demo_gitRepo  
     type: GitRepo  
     configuration:  
-      path: [your_Github_username]/Horae  
+      path: [your_Github_username]/Horae  **<<<--- HERE**
       gitProvider: GitHub  
   - name: gitRepo_code  
     type: GitRepo  
     configuration:  
-      path: [your_Github_username]/project-examples  
+      path: [your_Github_username]/project-examples  **<<<--- HERE** 
       gitProvider: GitHub  
       branches:  
         include: eplus-v2-orbitera  
@@ -69,18 +78,18 @@ Go to Horae/pipelines/more_resources.yml and modify the following values based o
     type:           DistributionRule  
     configuration:  
       sourceDistribution:   Distribution  
-      serviceName:          [servername]  
-      siteName:             "[servername]"  
+      serviceName:          [servername]  **<<<--- HERE**  
+      siteName:             "[servername]"  **<<<--- HERE**  
       cityName:             "*"  
       countryCodes:  
         - "*"  
 ```        
 Add your forked repository (forked from **shimib/Horae**) as a pipelines source
-You can follow the instructions [here | https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch)] to add a "Single-branch" source
+You can follow the instructions [here](https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch) to add a **"Single-branch"** source
 
 > Note: 
     
-    > E+ Trial: Use -- 
+    > Enterprise+ Trial: Use -- 
         Pipeline Config File Filter : pipelines/.*\.yml
     
     > Free tier: Use --
@@ -89,8 +98,10 @@ You can follow the instructions [here | https://www.jfrog.com/confluence/display
 
 ### Deployment
 
+You're all set now, and ready to initialize your environment and run your first Pipelines!
+
 #### Run Pipelines
-  1. Run the init pipeline 1st which should : create users, groups, perms, repositories, xray policy & watch, and update xray indexes
+  1. Run the init pipeline 1st which should: Create users, groups, permissions, repositories, Xray policies & watches, update Xray indexes and setup Access Federation.
   2. Run the gradle_build pipeline
   3. Run the npm_build pipeline
   4. (The distribution pipeline should be triggered automatically)
