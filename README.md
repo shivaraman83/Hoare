@@ -44,9 +44,10 @@ You'll need to create 3 Pipelines integrations - [see documentation](https://www
    Create a Pipelines integration of type Distribution named "**Distribution**" and provide connection details to your Distribution endpoint.
     
    As an example:
-    *URL - https://myserver.domain.com/distribution*
-    *Admin user - myname@domain.com*
-    *Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y*
+   
+    URL - https://myserver.domain.com/distribution
+    Admin user - myname@domain.com
+    Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y
   
  > **Note that the integration names must match the source name in the yaml configuration and are case-sensitive**
 
