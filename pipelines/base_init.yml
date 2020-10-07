@@ -4,6 +4,8 @@ resources:
     configuration:
       path: shimib/Horae
       gitProvider: GitHub
+      branches:
+        include: master        
   - name: gitRepo_code
     type: GitRepo
     configuration:
