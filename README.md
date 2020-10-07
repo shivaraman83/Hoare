@@ -16,7 +16,7 @@ You'll need to create 3 Pipelines integrations - [see documentation](https://www
 
 ##### 1.1 Github 
    1.1.1 In order to create a GitHub integration, you need the generate a GitHub Personal Access token first.
-   As also stated in the documentation instructios below, generate a Github Personal Access Token with the 
+   As also stated in the documentation instructions below, generate a Github Personal Access Token with the 
    following permissions:
     
     * repo (all)
