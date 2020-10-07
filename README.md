@@ -1,58 +1,122 @@
 # Horae
 
-Seeding information for JFrog Platform Deployment free trial
+Setup an end to end example project for JFrog Platform Deployment leveraging the JFrog free trial.
 
 ## Getting Started
 
-Fork this project (shimib/Horae) along with https://github.com/jfrogtraining/project-examples
-
 ### Prerequisites
 
-You will need to have a fresh instance of JFrog Artifactory whether it is commercial or a free trial
-https://jfrog.com/platform/free-trial/
+You will need to have a fresh instance of JFrog Platform whether it is commercial or a [free trial](https://jfrog.com/platform/free-trial/)
 
 
 ### Installing
 
-#### Configure Integrations under "Pipelines"
-#####  Artifactory
-    Create a Pipelines integration of type Artifactory named "Artifactory" and provide the details for your Artifactory access (URL, admin user and password/apikey).
+#### 1.0 Configure Integrations under "Pipelines"
+You'll need to create 3 Pipelines integrations - [see documentation](https://www.jfrog.com/confluence/display/JFROG/Configuring+Pipelines#ConfiguringPipelines-add-integrationAddingAdministrationIntegrations) in order to setup JFrog Pipelines to work with your Artifactory & Distribution services, as well as pull the Pipelines sample code from GitHub. 
 
-##### Github 
-    Create a Pipelines integration of type GitHub named "GitHub" and provide connection details generated according to: https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration
+##### 1.1 Github 
+   1.1.1 In order to create a GitHub integration, you need the generate a GitHub Personal Access token first.
+   As also stated in the documentation instructions below, generate a Github Personal Access Token with the 
+   following permissions:
+    
+    * repo (all)
+    * admin:repo_hook (read, write)
+    * admin:public_key (read, write)
+   
+   An example token would look like that  `2f3ed30dec7537a56064436cbedacc00813d247d`
+    
+   1.1.2 Create a Pipelines integration of type GitHub named "**GitHub**" and provide connection details generated according to the [documentation](https://www.jfrog.com/confluence/display/JFROG/GitHub+Integration).
 
-According to the instructios above, generate a Github Personal Access Token with the following permissions
-* repo (all)
-* admin:repo_hook (read, write)
-* admin:public_key (read, write)
->>>>>>> 2f3ed30dec7537a56064436cbedacc00813d247d
   
-##### Distribution
-###### Only for E+ subsription (not to perform on the free tier)
-    Create a Pipelines integration of type Distribution named Distribution and provide connection details to your Distribution endpoint.
+#####  1.2 Artifactory
+   In order to create an Artifactory integration, we recommend that you'll generate an API Key following these [instructions]( https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey]).
+   
+   Create a Pipelines integration of type Artifactory named "**Artifactory**" and provide the details for your Artifactory access (URL, admin user and password/apikey).
+   
+   As an example:
+    
+    URL - https://myserver.domain.com/artifactory
+    Admin user - myname@domain.com
+    Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y'
+
+##### 1.3 Distribution
+###### Only for Enterprise+ subsription (not to perform on the free tier)
+   Create a Pipelines integration of type Distribution named "**Distribution**" and provide connection details to your Distribution endpoint.
+    
+   As an example:
+   
+    URL - https://myserver.domain.com/distribution
+    Admin user - myname@domain.com
+    Password/APIKey - AKCp8hyPw7CP3GuGCxqThixEJCjjuY26v1BotRtVctcdcgudsn7JDMBvHBYfDCMyGD6Htu65Y
   
-  
- > *Note that the integration names must match the source name in the yml configuration and is case-sensitive*
+ > **Note that the integration names must match the source name in the yaml configuration and are case-sensitive**
+
  
- https://www.jfrog.com/confluence/display/JFROG/Configuring+Pipelines#ConfiguringPipelines-add-integrationAddingAdministrationIntegrations
- 
- 
-#### Configure Pipeline Sources
-Fork the following two (2) repositories:
+#### 2.0 Configure Pipeline Sources
+2.1 Fork the following two (2) repositories:
   
   * https://github.com/shimib/Horae
-  * https://github.com/shimib/project-examples
+  * https://github.com/shimib/project-examples (Make sure you fork the following branch: eplus-v2-orbitera or simply "all branches")
   
-Add your forked repository (forked from **shimib/Horae**) as a pipelines source
+2.2 Next we'll need to modify some of the configuration in the forked code:
+
+2.2.1 Go to Horae/pipelines/base_init.yml and modify the following values based on your github path.
+
+> Horae/pipelines/base_init.yml:  
+```
+resources:  
+  - name: demo_gitRepo  
+    type: GitRepo  
+    configuration:  
+      path: [your_Github_username]/Horae  <<<--- CHANGE HERE
+      gitProvider: GitHub  
+  - name: gitRepo_code  
+    type: GitRepo  
+    configuration:  
+      path: [your_Github_username]/project-examples  <<<--- CHANGE HERE 
+      gitProvider: GitHub  CHANGE 
+      branches:  
+        include: eplus-v2-orbitera  
+```
+2.2.2 Go to Horae/pipelines/more_resources.yml and modify the following values based on your artifactory server name.
+
+> Horae/pipelines/more_resources.yml:  
+```
+  - name:           Distribution_Rule  
+    type:           DistributionRule  
+    configuration:  
+      sourceDistribution:   Distribution  
+      serviceName:          [servername]  <<<--- CHANGE HERE 
+      siteName:             "[servername]"  <<<--- CHANGE HERE 
+      cityName:             "*"  
+      countryCodes:  
+        - "*"  
+```        
+2.3 Add your forked repository (forked from **shimib/Horae**) as a pipelines source.
+You can follow the instructions [here](https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch)) on how to add a **"Single-branch"** source
+
+> Note: 
+    
+    > Enterprise+ Trial: Use -- 
+        Pipeline Config File Filter : pipelines/.*\.yml
+    
+    > Free tier: Use --
+        Pipeline Config File Filter: pipelines/base_.*yml
   
 
-### Deployment
+### 3.0 Deployment
 
-#### Run Pipelines
-  1. Run the init pipeline 1st which should : create users, groups, perms, repositories, xray policy & watch, and update xray indexes
-  2. Run the gradle_build pipeline
-  3. Run the npm_build pipeline
-  4. (The distribution pipeline should be triggered automatically)
+You're all set now, and ready to initialize your environment and run your first Pipelines!
+
+#### 4.0 Run Pipelines
+
+  4.1. Run the init pipeline 1st which should: Create users, groups, permissions, repositories, Xray policies & watches, update Xray indexes and setup Access Federation.
+  
+  4.2. Run the gradle_build pipeline
+  
+  4.3. Run the npm_build pipeline
+  
+  4.4. (The distribution pipeline should be triggered automatically)
 
 ## Contributing
 
@@ -68,6 +132,8 @@ Please read [CONTRIBUTING.md](https://github.com/shimib/Horae/blob/master/CONTRI
     <td align="center"><a href="https://github.com/shimib"><img src="https://avatars0.githubusercontent.com/u/2115093?s=400&u=83fe53677b3bbabf095ac89911d7ccccbb756f65&v=4" width="100px;" alt=""/><br /><sub><b>Shimi Bandiel</b></sub></a><br /><a title="Answering Questions">💬</a> <a href="https://github.com/shimib/Horae/commits?author=shimib" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Talks">📢</a></td>
 
 <td align="center"><a href="https://github.com/sauravthefrog"><img src="https://avatars1.githubusercontent.com/u/61025719?s=400&u=2ff91a2ea0b176d1bd10e0acc3c44c50e4a5bb24&v=4" width="100px;" alt=""/><br /><sub><b>Saurav Agrawal</b></sub></a><br /><a href="https://github.com/shimib/Horae/commits?author=sauravthefrog" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Tools">🔧</a></td>
+
+<td align="center"><a href="https://github.com/ronenl"><img src="https://avatars2.githubusercontent.com/u/7105951?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Ronen Lewit</b></sub></a><br /><a href="https://github.com/shimib/Horae/commits?author=ronenl10" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Tools">🔧</a></td>
   </tr>
  </table>
  <!-- markdownlint-enable -->
