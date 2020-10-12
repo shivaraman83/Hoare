@@ -19,8 +19,8 @@ resources:
     type:           DistributionRule
     configuration:
       sourceDistribution:   Distribution
-      serviceName:          horaeedgetest3
-      siteName:             "horaeedgetest3"
+      serviceName:          "*"
+      siteName:             "*"
       cityName:             "*"
       countryCodes:
         - "*"
