@@ -4,8 +4,8 @@ pipelines:
       environmentVariables:
         readOnly:
           Version: 1.1.$run_number
-
-
+    
+    
     steps:
       - name: gradle_bld_app
         type: GradleBuild
@@ -108,7 +108,7 @@ pipelines:
             - name: docker_gradleBuild_Info
               trigger: true
           outputResources:
-            - name: scanned_gradle_dockerBuild_Info       #     Currently not in use
+            - name: scanned_gradle_dockerBuild_Info
 
       - name: gradle_docker_promote
         type: PromoteBuild
@@ -118,8 +118,6 @@ pipelines:
           status:                Passed
           comment:               Artifact passed Xray Scan
           copy:                  false
-#           inputSteps:
-#             - name: Gradle_docker_scan
           inputResources:
             - name:    scanned_gradle_dockerBuild_Info
               trigger: true
