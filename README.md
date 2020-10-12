@@ -1,4 +1,4 @@
-# Horae
+# Hoare
 
 Setup an end to end example project for JFrog Platform Deployment leveraging the JFrog free trial.
 
@@ -55,20 +55,20 @@ You'll need to create 3 Pipelines integrations - [see documentation](https://www
 #### 2.0 Configure Pipeline Sources
 2.1 Fork the following two (2) repositories:
   
-  * https://github.com/shimib/Horae
+  * https://github.com/shimib/Hoaree
   * https://github.com/shimib/project-examples (Make sure you fork the following branch: eplus-v2-orbitera or simply "all branches")
   
 2.2 Next we'll need to modify some of the configuration in the forked code:
 
-2.2.1 Go to Horae/pipelines/base_init.yml and modify the following values based on your github path.
+2.2.1 Go to Hoare/pipelines/base_init.yml and modify the following values based on your github path.
 
-> Horae/pipelines/base_init.yml:  
+> Hoare/pipelines/base_init.yml:  
 ```
 resources:  
   - name: demo_gitRepo  
     type: GitRepo  
     configuration:  
-      path: [your_Github_username]/Horae  <<<--- CHANGE HERE
+      path: [your_Github_username]/Hoare  <<<--- CHANGE HERE
       gitProvider: GitHub  
   - name: gitRepo_code  
     type: GitRepo  
@@ -78,9 +78,9 @@ resources:
       branches:  
         include: eplus-v2-orbitera  
 ```
-2.2.2 Go to Horae/pipelines/more_resources.yml and modify the following values based on your artifactory server name.
+2.2.2 Go to Hoare/pipelines/more_resources.yml and modify the following values based on your artifactory server name.
 
-> Horae/pipelines/more_resources.yml:  
+> Hoare/pipelines/more_resources.yml:  
 ```
   - name:           Distribution_Rule  
     type:           DistributionRule  
@@ -92,7 +92,7 @@ resources:
       countryCodes:  
         - "*"  
 ```        
-2.3 Add your forked repository (forked from **shimib/Horae**) as a pipelines source.
+2.3 Add your forked repository (forked from **shimib/Hoare**) as a pipelines source.
 You can follow the instructions [here](https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch)) on how to add a **"Single-branch"** source
 
 > Note: 
@@ -120,7 +120,7 @@ You're all set now, and ready to initialize your environment and run your first 
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/shimib/Horae/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/shimib/Hoare/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Contributors
 
@@ -129,19 +129,19 @@ Please read [CONTRIBUTING.md](https://github.com/shimib/Horae/blob/master/CONTRI
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/shimib"><img src="https://avatars0.githubusercontent.com/u/2115093?s=400&u=83fe53677b3bbabf095ac89911d7ccccbb756f65&v=4" width="100px;" alt=""/><br /><sub><b>Shimi Bandiel</b></sub></a><br /><a title="Answering Questions">💬</a> <a href="https://github.com/shimib/Horae/commits?author=shimib" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Talks">📢</a></td>
+    <td align="center"><a href="https://github.com/shimib"><img src="https://avatars0.githubusercontent.com/u/2115093?s=400&u=83fe53677b3bbabf095ac89911d7ccccbb756f65&v=4" width="100px;" alt=""/><br /><sub><b>Shimi Bandiel</b></sub></a><br /><a title="Answering Questions">💬</a> <a href="https://github.com/shimib/Hoare/commits?author=shimib" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Talks">📢</a></td>
 
-<td align="center"><a href="https://github.com/sauravthefrog"><img src="https://avatars1.githubusercontent.com/u/61025719?s=400&u=2ff91a2ea0b176d1bd10e0acc3c44c50e4a5bb24&v=4" width="100px;" alt=""/><br /><sub><b>Saurav Agrawal</b></sub></a><br /><a href="https://github.com/shimib/Horae/commits?author=sauravthefrog" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Tools">🔧</a></td>
+<td align="center"><a href="https://github.com/sauravthefrog"><img src="https://avatars1.githubusercontent.com/u/61025719?s=400&u=2ff91a2ea0b176d1bd10e0acc3c44c50e4a5bb24&v=4" width="100px;" alt=""/><br /><sub><b>Saurav Agrawal</b></sub></a><br /><a href="https://github.com/shimib/Hoare/commits?author=sauravthefrog" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Tools">🔧</a></td>
 
-<td align="center"><a href="https://github.com/ronenl"><img src="https://avatars2.githubusercontent.com/u/7105951?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Ronen Lewit</b></sub></a><br /><a href="https://github.com/shimib/Horae/commits?author=ronenl10" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Tools">🔧</a></td>
+<td align="center"><a href="https://github.com/ronenl"><img src="https://avatars2.githubusercontent.com/u/7105951?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Ronen Lewit</b></sub></a><br /><a href="https://github.com/shimib/Hoare/commits?author=ronenl10" title="Documentation">📖</a> <a title="Reviewed Pull Requests">👀</a> <a title="Tools">🔧</a></td>
   </tr>
  </table>
  <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-See also the list of [contributors](https://github.com/shimib/Horae/blob/master/contributors.md) who participated in this project.
+See also the list of [contributors](https://github.com/shimib/Hoare/blob/master/contributors.md) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/shimib/Horae/blob/master/LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/shimib/Hoare/blob/master/LICENSE.md) file for details
