@@ -109,7 +109,8 @@ pipelines:
             - mkdir -p npm_results
             - popd
             - export ArtIP=$(echo ${int_Artifactory_url}|awk -F '/' '{print $3}' | sed -e "s/\.jfrog\.io$//" ) 
-            - export Fullimagename="${ArtIP}-docker-demo.jfrog.io/npm-app" 
+            #- export Fullimagename="${ArtIP}-docker-demo.jfrog.io/npm-app"
+            - export Fullimagename="${ArtIP}/docker-demo/gradle-app"
 
           onSuccess:
             - echo "Congrats The Docker image was build"
