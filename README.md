@@ -77,21 +77,7 @@ resources:
       gitProvider: GitHub  CHANGE 
       branches:  
         include: eplus-v2-orbitera  
-```
-2.2.2 Go to Hoare/pipelines/more_resources.yml and modify the following values based on your artifactory server name.
-
-> Hoare/pipelines/more_resources.yml:  
-```
-  - name:           Distribution_Rule  
-    type:           DistributionRule  
-    configuration:  
-      sourceDistribution:   Distribution  
-      serviceName:          [servername]  <<<--- CHANGE HERE 
-      siteName:             "[servername]"  <<<--- CHANGE HERE 
-      cityName:             "*"  
-      countryCodes:  
-        - "*"  
-```        
+```     
 2.3 Add your forked repository (forked from **shimib/Hoare**) as a pipelines source.
 You can follow the instructions [here](https://www.jfrog.com/confluence/display/JFROG/Managing+Pipeline+Sources#ManagingPipelineSources-AddingaPipelineSource(SingleBranch)) on how to add a **"Single-branch"** source
 
