@@ -73,6 +73,7 @@ resources:
       sourceArtifactory: Artifactory
       buildName: gradle_build
       buildNumber: ${run_number}
+      
   - name:       npm_fileSpec
     type:       FileSpec
     configuration:     
@@ -81,6 +82,7 @@ resources:
       target:               npm_results/
       buildName:            npm_build   # optional
       buildNumber:          ${run_number}
+  
   - name: npmBuildInfo
     type: BuildInfo
     configuration:
@@ -132,9 +134,6 @@ resources:
       sourceArtifactory: Artifactory
       buildName: npm_build
       buildNumber: ${run_number}    
-      
-      
-
       
 pipelines:
   - name: init_environment
