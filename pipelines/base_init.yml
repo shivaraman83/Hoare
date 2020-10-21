@@ -2,14 +2,14 @@ resources:
   - name: demo_gitRepo
     type: GitRepo
     configuration:
-      path: sauravthefrog/Hoare
+      path: shivaraman83/Hoare
       gitProvider: GitHub
       branches:
         include: master        
   - name: gitRepo_code
     type: GitRepo
     configuration:
-      path: sauravthefrog/project-examples
+      path: shivaraman83/project-examples
       gitProvider: GitHub
       branches:
         include: eplus-v2-orbitera
